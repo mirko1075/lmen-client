@@ -1,32 +1,50 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { withAuth } from './../context/auth-context';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { withAuth } from "./../context/auth-context";
 
 class Navbar extends Component {
   render() {
     // const { user, logout, isLoggedin } = this.props;
     return (
-      <nav className="navbar">
-        <Link to={'/'} id='home-btn'>
-          <h4>Home</h4>
-        </Link>
-        {this.props.isLoggedIn ? (
-          <>
-            <p>username: {this.props.user && this.props.user.username}</p>
-            <button onClick={this.props.logout}>Logout</button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">
-              <button className="navbar-button">Login</button>{' '}
-            </Link>
-            <br />
-            <Link to="/signup">
-              <button className="navbar-button">Sign Up</button>{' '}
-            </Link>
-          </>
-        )}
-      </nav>
+      <header>
+        <nav className="navbar">
+          {this.props.isLoggedIn ? (
+            <div>
+              <Link onClick={this.props.logout} to="#">
+                Logout
+              </Link>{" "}
+              -{" Welcome "}
+              {this.props.user && this.props.user.firstName}
+            </div>
+          ) : (
+            <div>
+              <ul>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/signup">Sign Up</Link>
+                </li>
+              </ul>
+            </div>
+          )}
+          <div className="header"></div>
+          <ul>
+            <li>
+              <Link to={"/ProductList"}>Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li className="cart">
+              <Link to="/cart">
+                <ion-icon name="basket"></ion-icon>Cart
+                <span>0</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
     );
   }
 }

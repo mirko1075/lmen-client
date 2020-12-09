@@ -1,26 +1,55 @@
-html, body {
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+.header {
+  background-image: url("./images/cover.jpeg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 50vw;
+  height: 10vh;
+  position: relative;
 }
 
-.App {
-  padding: 20px;;
+.overlay {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  right: 0;
+  bottom: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+  background-color: rgba(10, 10, 10, 0.3);
 }
-
-nav.navbar { 
+nav {
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  align-self: flex-start;
   display: flex;
-  padding: 0px 20px;
-  background: #686de0; 
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 50px 60px 0 60px;
 }
 
-button.navbar-button {
-  padding: 5px 20px;
-  width: 100px;
-  margin: 15px 10px;
-  border-radius: 3px;
+nav li {
+  list-style: none;
+  display: inline-block;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
-#home-btn {
-  color: white;
+li link {
+  padding: 5px;
+  background-color: #fff;
   text-decoration: none;
 }

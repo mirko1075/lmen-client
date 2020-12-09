@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
-import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component } from "react";
+import "./App.css";
+import { Switch, Route } from "react-router-dom";
 
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import Private from './pages/Private';
+import Navbar from "./components/Navbar";
+import Cart from "./components/Cart";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import ProductList from "./pages/ProductList";
+import ProductDetail from "./pages/ProductDetail";
 
-import AnonRoute from './components/AnonRoute';
-import PrivateRoute from './components/PrivateRoute';
-
-
+import AnonRoute from "./components/AnonRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 class App extends Component {
   render() {
@@ -20,13 +19,12 @@ class App extends Component {
         <Navbar />
 
         <Switch>
-          <Route exact path="/" component={Home} />
-
-
+          <Route exact path="/ProductList" component={ProductList} />
+          <Route exact path="/ProductDetail/:id" component={ProductDetail} />
           <AnonRoute exact path="/signup" component={Signup} />
           <AnonRoute exact path="/login" component={Login} />
 
-          <PrivateRoute exact path="/private" component={Private} />
+          <PrivateRoute exact path="/cart" component={Cart} />
         </Switch>
       </div>
     );
