@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import apiService from "./../lib/api-service";
 
+import apiService from "./../lib/api-service";
+import ListCard from "./../components/ListCard";
 class ProductList extends Component {
   state = {
     products: [],
@@ -24,12 +24,12 @@ class ProductList extends Component {
     console.log("this.state :>> ", this.state);
     const productList = this.state.products;
     return (
-      <div>
+      <div className="productListDiv">
         {productList &&
           productList.map((elem) => {
             return (
               <div key={elem._id}>
-                <Link to={"/ProductDetail/" + elem._id}>{elem.name}</Link>
+                <ListCard product={elem} />
               </div>
             );
           })}

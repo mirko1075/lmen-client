@@ -53,3 +53,17 @@ li link {
   background-color: #fff;
   text-decoration: none;
 }
+
+.listCard {
+  width: 30vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.productListDiv {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -3,7 +3,7 @@ import "./App.css";
 import { Switch, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import Cart from "./components/Cart";
+import ShoppingCart from "./pages/ShoppingCart";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ProductList from "./pages/ProductList";
@@ -24,7 +24,7 @@ class App extends Component {
           <AnonRoute exact path="/signup" component={Signup} />
           <AnonRoute exact path="/login" component={Login} />
 
-          <PrivateRoute exact path="/cart" component={Cart} />
+          <PrivateRoute exact path="/ShoppingCart" component={ShoppingCart} />
         </Switch>
       </div>
     );

@@ -21,11 +21,10 @@ class ApiService {
     return pr;
   }
 
-  getProduct(productId) {
+  getOne(productId) {
     const pr = this.api
-      .post("/products/" + productId)
+      .get("/products/" + productId)
       .then((response) => response.data);
-
     return pr;
   }
 }
