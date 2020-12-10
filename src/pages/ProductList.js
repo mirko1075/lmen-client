@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import apiService from "./../lib/api-service";
 import ListCard from "./../components/ListCard";
+import MenuCategories from "./../components/MenuCategories";
+
 class ProductList extends Component {
   state = {
     products: [],
@@ -25,14 +27,26 @@ class ProductList extends Component {
     const productList = this.state.products;
     return (
       <div className="productListDiv">
-        {productList &&
-          productList.map((elem) => {
-            return (
-              <div key={elem._id}>
-                <ListCard product={elem} />
-              </div>
-            );
-          })}
+        <img
+          src={
+            "https://res.cloudinary.com/dps0lnavi/image/upload/v1607598662/Logo_lmen.png"
+          }
+          alt=""
+        />
+        <div className="productListContDiv">
+          <div className="menuCategories">
+            <MenuCategories />
+          </div>
+
+          {productList &&
+            productList.map((elem) => {
+              return (
+                <div key={elem._id}>
+                  <ListCard product={elem} />
+                </div>
+              );
+            })}
+        </div>
       </div>
     );
   }

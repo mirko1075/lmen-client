@@ -5,16 +5,16 @@ require("dotenv").config();
 // const API_BASE_URL = process.env.API_BASE_URL.toString();
 // const API_PORT = process.env.API_PORT.toString();
 
-class ApiService {
+class CartService {
   constructor() {
     this.api = axios.create({
-      baseURL: "http://localhost:5000/api",
+      baseURL: "http://localhost:5000/private",
     });
   }
 
-  getAll() {
+  getCart() {
     const pr = this.api
-      .get("/products")
+      .get("/cart")
       .then((response) => {
         return response.data;
       })
@@ -26,19 +26,13 @@ class ApiService {
     return pr;
   }
 
-  getOne(productId) {
+  updateCart(cartArr) {
     const pr = this.api
-      .get("/products/" + productId)
+
+      .post("/cart/")
+
       .then((response) => response.data)
-      .catch((err) => {
-        console.log(err);
-      });
-    return pr;
-  }
-  getCategories() {
-    const pr = this.api
-      .get("/categories")
-      .then((response) => response.data)
+
       .catch((err) => {
         console.log(err);
       });
@@ -46,9 +40,9 @@ class ApiService {
   }
 }
 
-const apiService = new ApiService();
+const cartService = new CartService();
 
-export default apiService;
+export default cartService;
 
 // Service is a set of methods abstracted and placed into a class, out of which we create one instance.
 // In the above case, all axios request calls are abstracted into methods.

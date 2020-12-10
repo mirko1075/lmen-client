@@ -11,21 +11,26 @@ import ProductDetail from "./pages/ProductDetail";
 
 import AnonRoute from "./components/AnonRoute";
 import PrivateRoute from "./components/PrivateRoute";
+import Footer from "./components/Footer";
 
 class App extends Component {
   render() {
     return (
       <div className="container">
-        <Navbar />
+        <header>
+          <Navbar />
+        </header>
+        <div className="pageContent">
+          <Switch>
+            <Route exact path="/ProductList" component={ProductList} />
+            <Route exact path="/ProductDetail/:id" component={ProductDetail} />
+            <AnonRoute exact path="/signup" component={Signup} />
+            <AnonRoute exact path="/login" component={Login} />
 
-        <Switch>
-          <Route exact path="/ProductList" component={ProductList} />
-          <Route exact path="/ProductDetail/:id" component={ProductDetail} />
-          <AnonRoute exact path="/signup" component={Signup} />
-          <AnonRoute exact path="/login" component={Login} />
-
-          <PrivateRoute exact path="/ShoppingCart" component={ShoppingCart} />
-        </Switch>
+            <PrivateRoute exact path="/ShoppingCart" component={ShoppingCart} />
+          </Switch>
+        </div>
+        <Footer />
       </div>
     );
   }

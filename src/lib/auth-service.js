@@ -1,13 +1,13 @@
 import axios from "axios";
 require("dotenv").config();
 
-const API_BASE_URL = process.env.API_BASE_URL.toString();
-const API_PORT = process.env.API_PORT.toString();
+// const API_BASE_URL = process.env.API_BASE_URL.toString();
+// const API_PORT = process.env.API_PORT.toString();
 
 class AuthService {
   constructor() {
     this.auth = axios.create({
-      baseURL: "http://" + API_BASE_URL + ":" + API_PORT,
+      baseURL: "http://localhost:5000",
       withCredentials: true,
     });
   }

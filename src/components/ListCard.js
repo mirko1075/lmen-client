@@ -5,21 +5,20 @@ export default function ListCard(props) {
   return (
     <div className="listCard">
       <Link to={"/productDetail/" + product._id}>
-        <h3>{product.name}</h3>
-      </Link>
-      <img
-        src={
-          "https://res.cloudinary.com/dps0lnavi/image/upload/c_thumb,w_200,g_face/v1607543765/" +
-          product.image.toLowerCase() +
-          "_1.jpg"
-        }
-        alt=""
-      />
-      <p>{product.description}</p>
+        <h3 className="productListItem">{product.name}</h3>
 
-      <p>
-        {product.price} € -- <Link>BUY</Link>
-      </p>
+        <img
+          src={
+            "https://res.cloudinary.com/dps0lnavi/image/upload/c_thumb,w_200,g_face/v1607543765/" +
+            product.image.toLowerCase() +
+            "_1.jpg"
+          }
+          alt=""
+        />
+        <p>
+          {product.price} € -- <Link>BUY</Link>
+        </p>
+      </Link>
     </div>
   );
 }

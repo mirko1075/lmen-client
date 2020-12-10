@@ -5,7 +5,7 @@ export default function DetailCard(props) {
   const review = props.review;
 
   return (
-    <div>
+    <div className="detailCard">
       <p>{product && product.name}</p>
       <p>{product && product.description}</p>
       <p>{product && product.price} €</p>
