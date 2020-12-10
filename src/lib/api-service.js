@@ -1,9 +1,14 @@
 import axios from "axios";
+require("dotenv").config();
+
+//Connection to DB parameters
+const API_BASE_URL = process.env.API_BASE_URL.toString();
+const API_PORT = process.env.API_PORT.toString();
 
 class ApiService {
   constructor() {
     this.api = axios.create({
-      baseURL: "http://localhost:5000/api",
+      baseURL: "http://" + API_BASE_URL + ":" + API_PORT + "/api",
     });
   }
 
