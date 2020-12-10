@@ -7,7 +7,14 @@ export default function ListCard(props) {
       <Link to={"/productDetail/" + product._id}>
         <h3>{product.name}</h3>
       </Link>
-      <img src={"../images/" + product.image.toLowerCase() + "_1.jpg"} alt="" />
+      <img
+        src={
+          "https://res.cloudinary.com/dps0lnavi/image/upload/c_thumb,w_200,g_face/v1607543765/" +
+          product.image.toLowerCase() +
+          "_1.jpg"
+        }
+        alt=""
+      />
       <p>{product.description}</p>
 
       <p>

@@ -10,7 +10,10 @@ export default function DetailCard(props) {
       <p>{product && product.description}</p>
       <p>{product && product.price} €</p>
       <div>
-        <img src={`../images/${product.image}_1.jpg`} alt="" />
+        <img
+          src={`https://res.cloudinary.com/dps0lnavi/image/upload/v1607543765/${product.image}_1.jpg`}
+          alt=""
+        />
       </div>
       <ReviewCard review={review} />
     </div>
