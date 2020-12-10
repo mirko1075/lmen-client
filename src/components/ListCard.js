@@ -15,9 +15,7 @@ export default function ListCard(props) {
           }
           alt=""
         />
-        <p>
-          {product.price} € -- <Link>BUY</Link>
-        </p>
+        <p>{product.price} € -- BUY</p>
       </Link>
     </div>
   );

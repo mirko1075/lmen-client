@@ -26,7 +26,7 @@ class MenuCategories extends Component {
       <div>
         {categories &&
           categories.map((category) => {
-            return <Link>{category} </Link>;
+            return <Link key={category}>{category} </Link>;
           })}
       </div>
     );

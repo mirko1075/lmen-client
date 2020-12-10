@@ -13,18 +13,18 @@ export default function Footer() {
       <div className="FooterDivs">
         <h4>Customer care</h4>
         <div>
-          <Link>Returns and refound</Link>
-          <Link>Delivery</Link>
-          <Link>Security and payments</Link>
-          <Link>F.A.Q</Link>
-          <Link>Contact us</Link>
+          <Link to="#">Returns and refound</Link>
+          <Link to="#">Delivery</Link>
+          <Link to="#">Security and payments</Link>
+          <Link to="#">F.A.Q</Link>
+          <Link to="#">Contact us</Link>
         </div>
       </div>
       <div className="FooterDivs">
         <h4>Follow us on</h4>
         <div className="socials">
           {/* <!-- ShareThis BEGIN --> */}
-          <div class="sharethis-inline-follow-buttons"></div>
+          <div className="sharethis-inline-follow-buttons"></div>
           {/* <!-- ShareThis END --> */}
         </div>
       </div>
