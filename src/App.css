@@ -121,9 +121,11 @@ nav li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
 }
-
+.listCard div {
+  line-height: 2;
+}
 .productListContDiv {
   background-color: #fff;
   display: flex;
@@ -131,6 +133,14 @@ nav li {
   align-items: center;
   align-content: center;
   align-self: center;
+}
+.productListImg {
+  border-radius: 30px;
+}
+.detailImage {
+  border-radius: 30px;
+  width: 100px;
+  height: 100px;
 }
 .menuCategories {
   background-color: #333;
@@ -175,7 +185,7 @@ nav li {
 .detailCard {
   width: 100%;
   display: flex;
-  margin: 0 20px 0 20px;
+  margin: 0 20px 70px 20px;
   padding: 10px;
 }
 .detailCard img {
@@ -259,13 +269,17 @@ nav li {
 }
 
 .detailImage {
-  width: 150px;
+  width: 100px;
   height: auto;
 }
 
 .detailImgBox {
   display: flex;
   flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px 50px;
 }
 
 .detailData {
@@ -275,4 +289,5 @@ nav li {
 .detailMainImg {
   text-align: center;
   vertical-align: middle;
+  justify-content: space-evenly;
 }

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import profileLogo from "../images/profile.png";
-import exitLogo from "../images/exit.jpg";
 import { Link } from "react-router-dom";
 import { withAuth } from "./../context/auth-context";
 

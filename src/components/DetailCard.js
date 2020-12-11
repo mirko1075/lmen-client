@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import withCartContext from "../context/withCartContext";
 import ReviewCard from "../components/ReviewCard";
-export default class DetailCard extends Component {
+
+class DetailCard extends Component {
   state = {
     product: {},
     review: [],
@@ -26,6 +28,8 @@ export default class DetailCard extends Component {
     const { product, review } = this.state;
     const imgWidth = "150";
     const imgHeight = "150";
+    console.log("product :>> ", product);
+    console.log("this.props from product Detail :>> ", this.props.context);
 
     return (
       <div className="detailCard">
@@ -79,9 +83,34 @@ export default class DetailCard extends Component {
         </div>
 
         <div>
-          <p>Price {product && product.price} €</p>
+          {/* SHOPPING */}
+          <b style={{ textTransform: "capitalize" }}>{product.name} </b>
+          <div>{product.description}</div>
+          {product.countInStock > 0 ? (
+            <small>{product.countInStock + " Available"}</small>
+          ) : (
+            <small className="has-text-danger">Out Of Stock</small>
+          )}
+
+          <div className="is-clearfix">
+            <span className="tag is-primary">€ {product.price} </span>
+            <button
+              className="button is-small is-outlined is-primary   is-pulled-right"
+              onClick={() =>
+                this.props.addToCart({
+                  id: product.name,
+                  product,
+                  amount: 1,
+                })
+              }
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 }
+
+export default withCartContext(DetailCard);

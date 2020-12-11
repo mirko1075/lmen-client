@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { withProducts } from "../context/old-products-context";
+import withCartContext from "../context/withCartContext";
 import apiService from "./../lib/api-service";
 import ListCard from "./../components/ListCard";
 import MenuCategories from "./../components/MenuCategories";
@@ -39,7 +39,8 @@ class ProductList extends Component {
       });
   };
   render() {
-    // console.log("this.props :>> ", this.props);
+    console.log("this.props from product List :>> ", this.props.context);
+
     const productList = this.state.products;
     return (
       <div className="productListContDiv">
@@ -60,4 +61,4 @@ class ProductList extends Component {
 }
 
 // export default withProducts(ProductList);
-export default ProductList;
+export default withCartContext(ProductList);
