@@ -12,9 +12,42 @@ class AuthService {
     });
   }
 
-  signup(email, password) {
+  signup(
+    firstName,
+    lastName,
+    address,
+    country,
+    CP,
+    city,
+    state,
+    phoneNumber,
+    gender,
+    birthDateDay,
+    birthDateMonth,
+    birthDateYear,
+    email,
+    password
+  ) {
+    console.log("Fields :>> ", email, password);
+    console.log("SIGNING UP FROM AUTH SERVICE");
     const pr = this.auth
-      .post("/auth/signup", { email, password })
+      .post("/auth/signup", {
+        firstName,
+        lastName,
+        address,
+        country,
+        CP,
+        city,
+        state,
+        phoneNumber,
+        gender,
+        birthDateDay,
+        birthDateMonth,
+        birthDateYear,
+        email,
+        password,
+      })
+
       .then((response) => response.data);
     // .then(({ data }) => data); // Shorter way of `.then((response) => response.data);`
 

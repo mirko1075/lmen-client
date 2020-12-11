@@ -21,9 +21,39 @@ class AuthProvider extends React.Component {
       );
   }
 
-  signup = (email, password) => {
+  signup = (
+    firstName,
+    lastName,
+    address,
+    country,
+    CP,
+    city,
+    state,
+    phoneNumber,
+    gender,
+    birthDateDay,
+    birthDateMonth,
+    birthDateYear,
+    email,
+    password
+  ) => {
     authService
-      .signup(email, password)
+      .signup(
+        firstName,
+        lastName,
+        address,
+        country,
+        CP,
+        city,
+        state,
+        phoneNumber,
+        gender,
+        birthDateDay,
+        birthDateMonth,
+        birthDateYear,
+        email,
+        password
+      )
       .then((email) => this.setState({ isLoggedIn: true, email }))
       .catch((err) => {
         this.setState({ isLoggedIn: false, email: null });

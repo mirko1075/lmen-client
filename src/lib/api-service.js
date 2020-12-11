@@ -26,6 +26,20 @@ class ApiService {
     return pr;
   }
 
+  getForCategories(category) {
+    const pr = this.api
+      .get("/categories/" + category)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // .then(({ data }) => data); // Shorter way of `.then((response) => response.data);`
+
+    return pr;
+  }
+
   getOne(productId) {
     const pr = this.api
       .get("/products/" + productId)

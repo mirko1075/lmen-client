@@ -10,6 +10,21 @@
   width: 200px;
   height: 90px;
 }
+.profileLogo {
+  width: 50px;
+  height: 50px;
+  margin: 0px;
+}
+.homeUser {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.menu {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
 .logoDiv {
   position: absolute;
   z-index: 1;
@@ -31,6 +46,15 @@
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
+}
+
+.welcome {
+  color: white;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  align-content: center;
 }
 /* .overlay {
   position: absolute;
@@ -54,7 +78,7 @@ nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 50px 60px 0 60px;
+  padding: 20px 20px 0 20px;
   overflow: hidden;
   background-color: #333;
   position: fixed; /* Set the navbar to fixed position */
@@ -62,7 +86,7 @@ nav {
   width: 100%; /* Full width */
 }
 .pageContent {
-  margin-top: 250px; /* Add a top margin to avoid content overlay */
+  margin-top: 270px; /* Add a top margin to avoid content overlay */
 }
 nav li {
   list-style: none;
@@ -72,6 +96,14 @@ nav li {
 }
 
 .navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.navbar span {
   float: left;
   display: block;
   color: #f2f2f2;
@@ -142,6 +174,9 @@ nav li {
 
 .detailCard {
   width: 100%;
+  display: flex;
+  margin: 0 20px 0 20px;
+  padding: 10px;
 }
 .detailCard img {
   width: 15vw;
@@ -203,4 +238,41 @@ nav li {
   align-items: flex-start;
   margin: 50px;
   padding: 20px;
+}
+
+.authForm div {
+  margin: 5px;
+  padding: 5px;
+}
+
+.showProfile {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+  align-content: center;
+}
+
+.profileItems {
+  width: 20vw;
+  text-align: center;
+}
+
+.detailImage {
+  width: 150px;
+  height: auto;
+}
+
+.detailImgBox {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.detailData {
+  padding: 20px;
+}
+
+.detailMainImg {
+  text-align: center;
+  vertical-align: middle;
 }
