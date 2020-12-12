@@ -49,6 +49,37 @@ class ApiService {
       });
     return pr;
   }
+
+  createOne(
+    image,
+    name,
+    description,
+    dimension,
+    category,
+    technic,
+    material,
+    price,
+    stock
+  ) {
+    const pr = this.api
+      .post("/products/", {
+        image,
+        name,
+        description,
+        dimension,
+        category,
+        technic,
+        material,
+        price,
+        stock,
+      })
+      .then((response) => response.data)
+      .catch((err) => {
+        console.log(err);
+      });
+    return pr;
+  }
+
   getCategories() {
     const pr = this.api
       .get("/categories")

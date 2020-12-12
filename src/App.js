@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
+import Context from "./context/cart-context";
+import apiService from "./lib/api-service";
+import authService from "./lib/auth-service";
 
+// Importing mcomponents //
 import Navbar from "./components/Navbar";
 import ShoppingCart from "./pages/ShoppingCart";
 import Signup from "./pages/Signup";
@@ -15,7 +19,6 @@ import AddProduct from "./components/AddProduct";
 import AnonRoute from "./components/AnonRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import Footer from "./components/Footer";
-import Context from "./context/cart-context";
 
 class App extends Component {
   constructor(props) {
@@ -25,6 +28,32 @@ class App extends Component {
       products: [],
     };
     this.routerRef = React.createRef();
+  }
+  componentDidMount() {
+    let user,
+      products,
+      cart = null;
+    apiService
+      .getAll()
+      .then((productsFound) => {
+        // console.log("All products :>> ", productsFound);
+        products = productsFound;
+        const pr = authService.me();
+        return pr;
+      })
+      .then((foundUser) => {
+        user = foundUser;
+        user = user ? JSON.parse(user) : null;
+        const pr = authService.getCart();
+        return pr;
+      })
+      .then((foundCart) => {
+        cart = foundCart;
+        cart = cart ? JSON.parse(cart) : {};
+
+        this.setState({ user, products: products.data, cart });
+      })
+      .catch((err) => {});
   }
   addProduct = (product, callback) => {
     let products = this.state.products.slice();

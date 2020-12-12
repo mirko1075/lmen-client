@@ -12,7 +12,7 @@ export default function ListCard(props) {
           <img
             src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_${imgWidth},h_${imgHeight},c_scale/v1607543765/${product.image.toLowerCase()}_1.jpg`}
             alt=""
-            class="productListImg"
+            className="productListImg"
           />
         </div>
         <div>

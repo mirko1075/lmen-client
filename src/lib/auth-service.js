@@ -73,6 +73,12 @@ class AuthService {
 
     return pr;
   }
+
+  getCart() {
+    const pr = this.auth.get("/auth/cart").then((response) => response.data);
+
+    return pr;
+  }
 }
 
 const authService = new AuthService();
