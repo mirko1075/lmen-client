@@ -28,6 +28,8 @@ class DetailCard extends Component {
     const { product, review } = this.state;
     const imgWidth = "150";
     const imgHeight = "150";
+    const addToCart = this.props.context.addToCart;
+    console.log("addToCart :>> ", addToCart);
     console.log("product :>> ", product);
     console.log("this.props from product Detail :>> ", this.props.context);
 
@@ -86,8 +88,8 @@ class DetailCard extends Component {
           {/* SHOPPING */}
           <b style={{ textTransform: "capitalize" }}>{product.name} </b>
           <div>{product.description}</div>
-          {product.countInStock > 0 ? (
-            <small>{product.countInStock + " Available"}</small>
+          {product.stock > 0 ? (
+            <small>{product.stock + " Available"}</small>
           ) : (
             <small className="has-text-danger">Out Of Stock</small>
           )}
@@ -97,7 +99,7 @@ class DetailCard extends Component {
             <button
               className="button is-small is-outlined is-primary   is-pulled-right"
               onClick={() =>
-                this.props.addToCart({
+                addToCart({
                   id: product.name,
                   product,
                   amount: 1,
