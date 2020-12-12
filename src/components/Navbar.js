@@ -57,7 +57,7 @@ class Navbar extends Component {
         <div className="logoDiv">
           <img
             src={
-              "https://res.cloudinary.com/dps0lnavi/image/upload/v1607598662/Logo_lmen.png"
+              "https://res.cloudinary.com/dps0lnavi/image/upload/v1607791340/Logo_lmen_pt3pwh.png"
             }
             alt=""
             className="logo"

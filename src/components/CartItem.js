@@ -2,7 +2,8 @@ import React from "react";
 
 const CartItem = (props) => {
   const { cartItem, cartKey } = props;
-
+  const imgWidth = "150";
+  const imgHeight = "150";
   const { product, amount } = cartItem;
   return (
     <div className=" column is-half">
@@ -11,7 +12,7 @@ const CartItem = (props) => {
           <div className="media-left">
             <figure className="image is-64x64">
               <img
-                src="https://bulma.io/images/placeholders/128x128.png"
+                src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_${imgWidth},h_${imgHeight},c_scale/${product.image}_1.jpg`}
                 alt={product.shortDesc}
               />
             </figure>

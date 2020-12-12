@@ -1,21 +1,23 @@
 import React from "react";
 import withCartContext from "../context/withCartContext";
-import CartItem from "./CartItem";
+import CartItem from "../components/CartItem";
 
 const Cart = (props) => {
   const { cart } = props.context;
+  console.log("props.context from Cart detail:>> ", props.context);
   const cartKeys = Object.keys(cart || {});
+  console.log("cartKeys :>> ", cartKeys);
   return (
     <>
-      <div className="hero is-primary">
-        <div className="hero-body container">
+      <div className="">
+        <div className="">
           <h4 className="title">My Cart</h4>
         </div>
       </div>
       <br />
       <div className="container">
         {cartKeys.length ? (
-          <div className="column columns is-multiline">
+          <div className="">
             {cartKeys.map((key) => (
               <CartItem
                 cartKey={key}
@@ -24,19 +26,13 @@ const Cart = (props) => {
                 removeFromCart={props.context.removeFromCart}
               />
             ))}
-            <div className="column is-12 is-clearfix">
+            <div className="">
               <br />
-              <div className="is-pulled-right">
-                <button
-                  onClick={props.context.clearCart}
-                  className="button is-warning "
-                >
+              <div className="">
+                <button onClick={props.context.clearCart} className="">
                   Clear cart
                 </button>{" "}
-                <button
-                  className="button is-success"
-                  onClick={props.context.checkout}
-                >
+                <button className="" onClick={props.context.checkout}>
                   Checkout
                 </button>
               </div>
@@ -44,10 +40,15 @@ const Cart = (props) => {
           </div>
         ) : (
           <div className="column">
-            <div className="title has-text-grey-light">No item in cart!</div>
+            <div className="">No item in cart!</div>
           </div>
         )}
       </div>
+      <br />
+      <br />
+      <br /> <br />
+      <br />
+      <br />
     </>
   );
 };

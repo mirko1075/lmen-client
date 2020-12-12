@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import withCartContext from "../context/withCartContext";
 import ReviewCard from "../components/ReviewCard";
 
@@ -11,6 +12,7 @@ class DetailCard extends Component {
     img3: "",
     img4: "",
     img5: "",
+    showAddReview: false,
   };
   componentDidUpdate(prevProps) {
     const product = this.props.product;
@@ -23,15 +25,20 @@ class DetailCard extends Component {
       this.setState({ product, review });
     }
   }
-
+  showAddReview = () => {
+    console.log("AQUI");
+    this.state.showAddReview === false
+      ? this.setState({ showAddReview: true })
+      : this.setState({ showAddReview: false });
+  };
   render() {
     const { product, review } = this.state;
     const imgWidth = "150";
     const imgHeight = "150";
     const addToCart = this.props.context.addToCart;
-    console.log("addToCart :>> ", addToCart);
-    console.log("product :>> ", product);
-    console.log("this.props from product Detail :>> ", this.props.context);
+    // console.log("addToCart :>> ", addToCart);
+    // console.log("product :>> ", product);
+    // console.log("this.props from product Detail :>> ", this.props.context);
 
     return (
       <div className="detailCard">
@@ -80,7 +87,11 @@ class DetailCard extends Component {
             </div>
           </div>
           <div>
-            <ReviewCard review={review} />
+            <ReviewCard
+              show={this.state.showAddReview}
+              showAddReview={this.showAddReview}
+              review={review}
+            />
           </div>
         </div>
 
@@ -91,16 +102,16 @@ class DetailCard extends Component {
           {product.stock > 0 ? (
             <small>{product.stock + " Available"}</small>
           ) : (
-            <small className="has-text-danger">Out Of Stock</small>
+            <small className="">Out Of Stock</small>
           )}
 
-          <div className="is-clearfix">
-            <span className="tag is-primary">€ {product.price} </span>
+          <div className="">
+            <span className="">€ {product.price} </span>
             <button
-              className="button is-small is-outlined is-primary   is-pulled-right"
+              className=""
               onClick={() =>
                 addToCart({
-                  id: product.name,
+                  id: product._id,
                   product,
                   amount: 1,
                 })
@@ -108,6 +119,7 @@ class DetailCard extends Component {
             >
               Add to Cart
             </button>
+            <Link to="/private/cart">See cart</Link>
           </div>
         </div>
       </div>

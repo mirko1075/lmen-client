@@ -89,6 +89,10 @@ class ApiService {
       });
     return pr;
   }
+
+  postReview() {
+    const pr = this.api();
+  }
 }
 
 const apiService = new ApiService();

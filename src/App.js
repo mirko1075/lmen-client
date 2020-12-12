@@ -5,9 +5,9 @@ import Context from "./context/cart-context";
 import apiService from "./lib/api-service";
 import authService from "./lib/auth-service";
 
-// Importing mcomponents //
-import Navbar from "./components/Navbar";
-import ShoppingCart from "./pages/ShoppingCart";
+// Importing PAGES //
+
+import Cart from "./pages/Cart";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ProductList from "./pages/ProductList";
@@ -15,6 +15,9 @@ import ProductDetail from "./pages/ProductDetail";
 import ViewProfile from "./pages/ViewProfile";
 import EditProfile from "./pages/EditProfile";
 import Home from "./pages/Home";
+import Checkout from "./pages/Checkout";
+// Importing COMPONENTS //
+import Navbar from "./components/Navbar";
 import AddProduct from "./components/AddProduct";
 import AnonRoute from "./components/AnonRoute";
 import PrivateRoute from "./components/PrivateRoute";
@@ -24,7 +27,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cart: {},
+      cart: [],
       products: [],
     };
     this.routerRef = React.createRef();
@@ -37,24 +40,26 @@ class App extends Component {
     apiService
       .getAll()
       .then((productsFound) => {
-        console.log("All products :>> ", productsFound);
+        // console.log("All products :>> ", productsFound);
         products = productsFound;
         const pr = authService.me();
         return pr;
       })
       .then((foundUser) => {
+        console.log("FoundUser :>> ", foundUser);
         user = foundUser;
-        user = user ? JSON.parse(user) : null;
+
         const pr = authService.getCart();
         return pr;
       })
       .then((foundCart) => {
         cart = foundCart;
-        cart = cart ? JSON.parse(cart) : {};
-
+        console.log("cart from App componentDidMount :>> ", cart);
         this.setState({ user, products: products.data, cart });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log("Error componentDidMount APP :>> ", err);
+      });
   }
 
   addProduct = (product, callback) => {
@@ -64,19 +69,35 @@ class App extends Component {
   };
 
   addToCart = (cartItem) => {
+    // console.log("this.state.cart :>> ", this.state.cart);
     let cart = this.state.cart;
-    if (cart[cartItem.id]) {
-      cart[cartItem.id].amount += cartItem.amount;
-    } else {
-      cart[cartItem.id] = cartItem;
+    // console.log("cartItem :>> ", cartItem);
+
+    // console.log("cart in state before update :>> ", cart);
+    let foundElement = false;
+    for (let i = 0; i < cart.length; i++) {
+      const element = cart[i];
+
+      if (
+        element.id === cartItem.id &&
+        element.amount + cartItem.amount <= element.product.stock
+      ) {
+        // console.log("HERE");
+        element.amount += cartItem.amount;
+        foundElement = true;
+      }
     }
-    if (cart[cartItem.id].amount > cart[cartItem.id].product.stock) {
-      cart[cartItem.id].amount = cart[cartItem.id].product.stock;
+    if (!foundElement) {
+      // console.log("cart item to push :>> ", cartItem);
+      cart.push(cartItem);
     }
+    // console.log("Cart after updating Arr :>> ", cart);
+
     authService
-      .setCart(cart)
+      .setCart({ cart })
       .then((cart) => {
-        this.setState({ cart });
+        this.setState(cart);
+        // console.log("this.state.cart after updating DB :>> ", this.state.cart);
       })
       .catch((err) => {});
   };
@@ -84,26 +105,28 @@ class App extends Component {
   removeFromCart = (cartItemId) => {
     let cart = this.state.cart;
     delete cart[cartItemId];
-    apiService
+    authService
       .setCart(cart)
       .then((cart) => {
-        this.setState({ cart });
+        this.setState(cart);
       })
       .catch((err) => {});
   };
 
   clearCart = () => {
-    let cart = {};
-    apiService
-      .setCart(cart)
+    let cart = [];
+    authService
+      .setCart({ cart })
       .then((cart) => {
-        this.setState({ cart });
+        this.setState({ cart: [] });
+        console.log("this.state :>> ", this.state);
       })
       .catch((err) => {});
   };
+
   checkout = () => {
     if (!this.state.user) {
-      this.routerRef.current.history.push("/login");
+      this.routerRef.current.history.push("/private/Checkout");
       return;
     }
 
@@ -172,10 +195,11 @@ class App extends Component {
                 path="/private/EditProfile"
                 component={EditProfile}
               />
+              <PrivateRoute exact path="/private/Cart" component={Cart} />
               <PrivateRoute
                 exact
-                path="/private/ShoppingCart"
-                component={ShoppingCart}
+                path="/private/Checkout"
+                component={Checkout}
               />
               <PrivateRoute
                 exact

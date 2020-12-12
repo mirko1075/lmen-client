@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import withCartContext from "../context/withCartContext";
 import { withAuth } from "./../context/auth-context";
 import apiService from "../lib/api-service";
-import { Redirect } from "react-router-dom";
-import axios from "axios";
 
 const initState = {
   image: "",
@@ -94,7 +92,7 @@ class AddProduct extends Component {
       stock,
     } = this.state;
     const user = this.props.user;
-    return !user && user.role != "admin" ? (
+    return !user && user.role !== "admin" ? (
       //   <Redirect to="/" />
       <div>Here</div>
     ) : (
