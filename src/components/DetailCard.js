@@ -12,7 +12,6 @@ class DetailCard extends Component {
     img3: "",
     img4: "",
     img5: "",
-    showAddReview: false,
   };
   componentDidUpdate(prevProps) {
     const product = this.props.product;
@@ -25,14 +24,10 @@ class DetailCard extends Component {
       this.setState({ product, review });
     }
   }
-  showAddReview = () => {
-    console.log("AQUI");
-    this.state.showAddReview === false
-      ? this.setState({ showAddReview: true })
-      : this.setState({ showAddReview: false });
-  };
+
   render() {
     const { product, review } = this.state;
+    console.log("props from DetailCard :>> ", this.props);
     const imgWidth = "150";
     const imgHeight = "150";
     const addToCart = this.props.context.addToCart;
@@ -87,11 +82,7 @@ class DetailCard extends Component {
             </div>
           </div>
           <div>
-            <ReviewCard
-              show={this.state.showAddReview}
-              showAddReview={this.showAddReview}
-              review={review}
-            />
+            <ReviewCard product={product} review={review} />
           </div>
         </div>
 

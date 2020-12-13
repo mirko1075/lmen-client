@@ -27,8 +27,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: "",
       cart: [],
       products: [],
+      cartElements: 0,
     };
     this.routerRef = React.createRef();
   }
@@ -40,14 +42,18 @@ class App extends Component {
     apiService
       .getAll()
       .then((productsFound) => {
-        // console.log("All products :>> ", productsFound);
+        console.log("All products :>> ", productsFound);
         products = productsFound;
         const pr = authService.me();
         return pr;
       })
       .then((foundUser) => {
         console.log("FoundUser :>> ", foundUser);
-        user = foundUser;
+        if (foundUser) {
+          user = foundUser;
+        } else {
+          user = null;
+        }
 
         const pr = authService.getCart();
         return pr;
@@ -55,7 +61,7 @@ class App extends Component {
       .then((foundCart) => {
         cart = foundCart;
         console.log("cart from App componentDidMount :>> ", cart);
-        this.setState({ user, products: products.data, cart });
+        this.setState({ user, products, cart });
       })
       .catch((err) => {
         console.log("Error componentDidMount APP :>> ", err);
@@ -69,11 +75,11 @@ class App extends Component {
   };
 
   addToCart = (cartItem) => {
-    // console.log("this.state.cart :>> ", this.state.cart);
+    console.log("this.state.cart :>> ", this.state.cart);
     let cart = this.state.cart;
-    // console.log("cartItem :>> ", cartItem);
+    console.log("cartItem :>> ", cartItem);
 
-    // console.log("cart in state before update :>> ", cart);
+    console.log("cart in state before update :>> ", cart);
     let foundElement = false;
     for (let i = 0; i < cart.length; i++) {
       const element = cart[i];
@@ -82,22 +88,24 @@ class App extends Component {
         element.id === cartItem.id &&
         element.amount + cartItem.amount <= element.product.stock
       ) {
-        // console.log("HERE");
+        console.log("HERE");
         element.amount += cartItem.amount;
+        this.setState({ cartElements: element.amount });
         foundElement = true;
       }
     }
     if (!foundElement) {
-      // console.log("cart item to push :>> ", cartItem);
+      console.log("cart item to push :>> ", cartItem);
+
       cart.push(cartItem);
     }
-    // console.log("Cart after updating Arr :>> ", cart);
+    console.log("Cart after updating Arr :>> ", cart);
 
     authService
       .setCart({ cart })
-      .then((cart) => {
+      .then((userUpdated) => {
         this.setState(cart);
-        // console.log("this.state.cart after updating DB :>> ", this.state.cart);
+        console.log("this.state.cart after updating DB :>> ", this.state.cart);
       })
       .catch((err) => {});
   };

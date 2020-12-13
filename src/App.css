@@ -8,7 +8,6 @@
 }
 .logo {
   width: 200px;
-  height: 90px;
 }
 .profileLogo {
   width: 50px;
@@ -116,12 +115,14 @@ nav li {
   color: black;
 }
 .listCard {
-  width: 30vw;
+  width: 10vw;
   height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  border: 1px solid grey;
+  margin: 10px;
 }
 .listCard div {
   line-height: 2;
@@ -135,7 +136,7 @@ nav li {
   align-self: center;
 }
 .productListImg {
-  border-radius: 30px;
+  width: 10vw;
 }
 .detailImage {
   border-radius: 30px;

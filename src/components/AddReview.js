@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import apiService from "./../lib/api-service";
-export default class AddReview extends Component {
+
+class AddReview extends Component {
   state = {
     title: "",
     message: "",
-    rating: "",
+    rate: "",
+    product: {},
   };
+  componentDidMount() {
+    const product = this.props.product;
+    this.setState({ product });
+  }
   handleChange = (event) => {
     const { name, value } = event.target;
     // console.log("name :>> ", name, "value", value);
@@ -13,7 +19,16 @@ export default class AddReview extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    const pr = apiService.
+    const updateReviews = this.props.updateReviews;
+    // console.log("updateReviews from AddReview:>> ", updateReviews);
+    // console.log("this.state from AddReview :>> ", this.state);
+    const pr = apiService.postReview(
+      this.state.product._id,
+      this.state.title,
+      this.state.message,
+      this.state.rate
+    );
+    this.props.updateReviews(this.state.product._id);
   };
 
   render() {
@@ -45,23 +60,25 @@ export default class AddReview extends Component {
             />
           </div>
           <div>
-            <label htmlFor="rating">Rating</label>
+            <label htmlFor="rate">rate</label>
           </div>
           <div>
             <input
               type="number"
-              name="rating"
+              name="rate"
               min="1"
               max="5"
-              id="rating"
+              id="rate"
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <input type="submit" value="Signup" />
+            <input type="submit" value="Add it" />
           </div>
         </form>
       </div>
     );
   }
 }
+
+export default AddReview;

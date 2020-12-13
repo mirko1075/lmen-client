@@ -3,33 +3,27 @@ import AddReview from "./AddReview";
 function ReviewCard(props) {
   const review = props.review;
   const showAddReview = props.showAddReview;
-  console.log("showAddReview :>> ", showAddReview);
-  console.log("props.show :>> ", props.show);
-  console.log("props :>> ", props);
+  // console.log("showAddReview :>> ", showAddReview);
+  // console.log("props.show :>> ", props.show);
+  // console.log("updateReviews from ReviewCard :>> ", props);
   return (
     <div>
       {review.length ? (
         review.map((review) => {
           return (
-            <div>
+            <div key={review._id}>
               <h3>
-                {review && review.title} - {review && review.updated_at} -{" "}
-                {review && review.reviewUser.email}
+                {review.title} <br />
+                {review.message} <br /> {review.userId.email} -
+                {review.updated_at}
               </h3>
-              <p>{review && review.description}</p>
+              <p>{review.description}</p>
             </div>
           );
         })
       ) : (
         <div>No reviews</div>
       )}
-      <div>
-        <button onClick={showAddReview}>
-          {props.show ? "Hide form" : "Add Review"}
-        </button>
-      </div>
-      {props.show ? <AddReview /> : null}
-      <br />
     </div>
   );
 }

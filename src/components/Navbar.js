@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import profileLogo from "../images/profile.png";
 import { Link } from "react-router-dom";
 import { withAuth } from "./../context/auth-context";
+import withCartContext from "../context/withCartContext";
 
 // import { withCategories } from "./../context/products-context";
 class Navbar extends Component {
   render() {
     // const { user, logout, isLoggedin } = this.props;
     // console.log("changeCategory :>> ", this.props);
+
     return (
       <div className="header">
         <nav className="navbar">
@@ -49,7 +51,7 @@ class Navbar extends Component {
                 <Link to="/cart">
                   <ion-icon name="basket"></ion-icon>Cart
                 </Link>
-                <span>0</span>
+                <span>{this.props.context.cartElements}</span>
               </li>
             </ul>
           </div>
@@ -57,7 +59,7 @@ class Navbar extends Component {
         <div className="logoDiv">
           <img
             src={
-              "https://res.cloudinary.com/dps0lnavi/image/upload/v1607791340/Logo_lmen_pt3pwh.png"
+              "https://res.cloudinary.com/dps0lnavi/image/upload/v1607793773/LMeN_LOGO_4_y4ognl.png"
             }
             alt=""
             className="logo"
@@ -69,4 +71,4 @@ class Navbar extends Component {
 }
 
 // export default withCategories(withAuth(Navbar));
-export default withAuth(Navbar);
+export default withCartContext(withAuth(Navbar));

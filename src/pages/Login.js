@@ -151,7 +151,7 @@ class Login extends Component {
           </div>
           <form onSubmit={this.handleSignUpFormSubmit}>
             <div>
-              <label for="password">First name</label>
+              <label htmlFor="password">First name</label>
             </div>
             <div>
               <input
@@ -162,7 +162,7 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label for="lastName">Last name</label>
+              <label htmlFor="lastName">Last name</label>
             </div>
             <div>
               <input
@@ -173,7 +173,7 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label for="address">Address</label>
+              <label htmlFor="address">Address</label>
             </div>
             <div>
               <input
@@ -185,7 +185,7 @@ class Login extends Component {
             </div>
 
             <div>
-              <label for="country">Country</label>
+              <label htmlFor="country">Country</label>
             </div>
             <div>
               <input
@@ -196,7 +196,7 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label for="CP">Zip code</label>
+              <label htmlFor="CP">Zip code</label>
             </div>
             <div>
               <input
@@ -207,7 +207,7 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label for="city">City</label>
+              <label htmlFor="city">City</label>
             </div>
             <div>
               <input
@@ -218,7 +218,7 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label for="state">State / state</label>
+              <label htmlFor="state">State / state</label>
             </div>
             <div>
               <input
@@ -229,7 +229,7 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label for="phoneNumber">Phone number</label>
+              <label htmlFor="phoneNumber">Phone number</label>
             </div>
             <div>
               <input
@@ -240,7 +240,7 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label for="birthDateDay">Birth date</label>
+              <label htmlFor="birthDateDay">Birth date</label>
             </div>
             <div>
               <input
@@ -265,7 +265,7 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label for="gender">Gender</label>
+              <label htmlFor="gender">Gender</label>
             </div>
             <div>
               {/* Male <input type="radio" name="gender" value="male" id="male" { gender === "male" ? "selected" : null} /> - Female
@@ -278,7 +278,7 @@ class Login extends Component {
               <input type="radio" name="gender" id="other" value="other" />
             </div>
             <div>
-              <label for="email">Email:</label>
+              <label htmlFor="email">Email:</label>
             </div>
             <div>
               <input
@@ -289,7 +289,7 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label for="password">Password:</label>
+              <label htmlFor="password">Password:</label>
             </div>
             <div>
               <input
@@ -300,7 +300,7 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label for="password">Repeat password:</label>
+              <label htmlFor="password">Repeat password:</label>
             </div>
             <div>
               <input

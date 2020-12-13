@@ -81,10 +81,10 @@ class AuthService {
   }
 
   setCart(cart) {
+    console.log("Auth service adding cart :>> ", cart);
     const pr = this.auth
       .post("/auth/cart", cart)
       .then((response) => response.data);
-
     return pr;
   }
 }

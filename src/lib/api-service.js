@@ -9,6 +9,7 @@ class ApiService {
   constructor() {
     this.api = axios.create({
       baseURL: "http://localhost:5000/api",
+      withCredentials: true,
     });
   }
 
@@ -90,8 +91,19 @@ class ApiService {
     return pr;
   }
 
-  postReview() {
-    const pr = this.api();
+  postReview(productId, title, message, rate) {
+    const pr = this.api
+      .post("/product/" + productId + "/reviews", {
+        productId,
+        title,
+        message,
+        rate,
+      })
+      .then((response) => response.data)
+      .catch((err) => {
+        console.log(err);
+      });
+    return pr;
   }
 }
 
