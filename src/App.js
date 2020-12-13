@@ -22,7 +22,7 @@ import AddProduct from "./components/AddProduct";
 import AnonRoute from "./components/AnonRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import Footer from "./components/Footer";
-
+import NotFoundPage from "./pages/NotFoundPage.js";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -102,10 +102,11 @@ class App extends Component {
     console.log("Cart after updating Arr :>> ", cart);
 
     authService
-      .setCart({ cart })
+      .setCart(cart)
       .then((userUpdated) => {
-        this.setState(cart);
-        console.log("this.state.cart after updating DB :>> ", this.state.cart);
+        console.log("cart from APP set Cart :>> ", cart);
+        this.setState({ cart });
+        console.log("this.state.cart after updating DB :>> ", this.state);
       })
       .catch((err) => {});
   };
@@ -214,6 +215,7 @@ class App extends Component {
                 path="/private/AddProduct"
                 component={AddProduct}
               />
+              <Route path="*" component={NotFoundPage} />
             </Switch>
           </div>
           <Footer />
