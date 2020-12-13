@@ -6,7 +6,7 @@ const Cart = (props) => {
   const { cart } = props.context;
   console.log("props.context from Cart detail:>> ", props.context);
   const cartKeys = Object.keys(cart || {});
-  console.log("cartKeys :>> ", cartKeys);
+  console.log("cartKeys :>> ", cartKeys, cart);
   return (
     <>
       <div className="">

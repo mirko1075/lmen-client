@@ -73,6 +73,68 @@ class AuthService {
 
     return pr;
   }
+  user() {
+    const pr = this.auth.get("/auth/user").then((response) => response.data);
+
+    return pr;
+  }
+  editProfile(
+    firstName,
+    lastName,
+    address,
+    country,
+    CP,
+    city,
+    state,
+    phoneNumber,
+    gender,
+    birthDateDay,
+    birthDateMonth,
+    birthDateYear,
+    email,
+    password,
+    repeatpassword
+  ) {
+    console.log("EDITING PROFILE FROM AUTH SERVICE");
+    console.log(
+      "Sending data :>> ",
+      firstName,
+      lastName,
+      address,
+      country,
+      CP,
+      city,
+      state,
+      phoneNumber,
+      gender,
+      birthDateDay,
+      birthDateMonth,
+      birthDateYear,
+      email,
+      password
+    );
+    const pr = this.auth
+      .post("/auth/editProfile", {
+        firstName,
+        lastName,
+        address,
+        country,
+        CP,
+        city,
+        state,
+        phoneNumber,
+        gender,
+        birthDateDay,
+        birthDateMonth,
+        birthDateYear,
+        email,
+        password,
+      })
+
+      .then((response) => response.data);
+
+    return pr;
+  }
 
   getCart() {
     const pr = this.auth.get("/auth/cart").then((response) => response.data);

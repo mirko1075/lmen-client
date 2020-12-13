@@ -45,23 +45,7 @@ class Login extends Component {
       email,
       password,
     } = this.state;
-    console.log(
-      "Params passed to aut service :>> ",
-      firstName,
-      lastName,
-      address,
-      country,
-      CP,
-      city,
-      state,
-      phoneNumber,
-      gender,
-      birthDateDay,
-      birthDateMonth,
-      birthDateYear,
-      email,
-      password
-    );
+
     this.props.signup(
       firstName,
       lastName,

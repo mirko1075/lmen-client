@@ -48,8 +48,8 @@ class Navbar extends Component {
                 <Link to="/about">About</Link>
               </li>
               <li className="cart">
-                <Link to="/cart">
-                  <ion-icon name="basket"></ion-icon>Cart
+                <Link to="/private/cart">
+                  <ion-icon name="cart"></ion-icon>Cart
                 </Link>
                 <span>{this.props.context.cartElements}</span>
               </li>

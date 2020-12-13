@@ -1,62 +1,83 @@
-import React from "react";
+import React, { Component } from "react";
 import { withAuth } from "./../context/auth-context";
+import authService from "./../lib/auth-service";
 import { Link } from "react-router-dom";
-function ViewProfile(props) {
-  const user = props.user;
 
-  return (
-    <div className="showProfile">
-      <h1>User profile</h1>
-      <br />
-      <div className="profileItems">
-        <h3>Name</h3>
-        {user.firstName}
+class ViewProfile extends Component {
+  state = {
+    user: {},
+  };
+
+  componentDidMount() {
+    const pr = authService
+      .user()
+      .then((user) => {
+        console.log("user :>> ", user);
+        this.setState({ user });
+        console.log("this.state :>> ", this.state);
+        return pr;
+      })
+      .catch((err) => {
+        console.log("Error retriving user");
+      });
+  }
+  render() {
+    return (
+      <div className="showProfile">
+        <h1>User profile</h1>
+        <br />
+        <div className="profileItems">
+          <h3>Name</h3>
+          {this.state.user.firstName}
+        </div>
+        <div className="profileItems">
+          <h3>Last name</h3>
+          {this.state.user.lasttName}
+        </div>
+        <div className="profileItems">
+          <h3>Email</h3>
+          {this.state.user.email}
+        </div>
+        <div className="profileItems">
+          <h3>Phone number</h3>
+          {this.state.user.phoneNumber}
+        </div>
+        <div className="profileItems">
+          <h3>Gender</h3>
+          {this.state.user.gender}
+        </div>
+        <div className="profileItems">
+          <h3>Birth day</h3>
+          {this.state.user.birthDateDay +
+            "/" +
+            this.state.user.birthDateMonth +
+            "/" +
+            this.state.user.birthDateYear}
+        </div>
+        <div className="profileItems">
+          <h3>Address</h3>
+          {this.state.user.address}
+        </div>
+        <div className="profileItems">
+          <h3>Country</h3>
+          {this.state.user.country}
+        </div>
+        <div className="profileItems">
+          <h3>Zip code</h3>
+          {this.state.user.CP}
+        </div>
+        <div className="profileItems">
+          <h3>City</h3>
+          {this.state.user.city}
+        </div>
+        <div className="profileItems">
+          <h3>State / Province</h3>
+          {this.state.user.state}
+        </div>
+        <Link to="/private/EditProfile">Edit</Link>
       </div>
-      <div className="profileItems">
-        <h3>Last name</h3>
-        {user.lasttName}
-      </div>
-      <div className="profileItems">
-        <h3>Email</h3>
-        {user.email}
-      </div>
-      <div className="profileItems">
-        <h3>Phone number</h3>
-        {user.phoneNumber}
-      </div>
-      <div className="profileItems">
-        <h3>Gender</h3>
-        {user.gender ? user.gender : null}
-      </div>
-      <div className="profileItems">
-        <h3>Birth day</h3>
-        {user.birthDateDay
-          ? user.birthDateMonth + "/" + user.birthDateYear
-          : ""}
-      </div>
-      <div className="profileItems">
-        <h3>Address</h3>
-        {user.address}
-      </div>
-      <div className="profileItems">
-        <h3>Country</h3>
-        {user.country}
-      </div>
-      <div className="profileItems">
-        <h3>Zip code</h3>
-        {user.CP}
-      </div>
-      <div className="profileItems">
-        <h3>City</h3>
-        {user.city}
-      </div>
-      <div className="profileItems">
-        <h3>State / Province</h3>
-        {user.state}
-      </div>
-      <Link to="/private/EditProfile">Edit</Link>
-    </div>
-  );
+    );
+  }
 }
 
 export default withAuth(ViewProfile);

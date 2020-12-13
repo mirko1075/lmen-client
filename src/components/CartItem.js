@@ -2,6 +2,8 @@ import React from "react";
 
 const CartItem = (props) => {
   const { cartItem, cartKey } = props;
+  console.log("cartItem from CartItem :>> ", cartItem);
+  console.log("cartKey from CartItem :>> ", cartKey);
   const imgWidth = "150";
   const imgHeight = "150";
   const { product, amount } = cartItem;

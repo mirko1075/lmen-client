@@ -76,6 +76,45 @@ class AuthProvider extends React.Component {
       .catch((err) => console.log(err));
   };
 
+  editProfile = (
+    firstName,
+    lastName,
+    address,
+    country,
+    CP,
+    city,
+    state,
+    phoneNumber,
+    gender,
+    birthDateDay,
+    birthDateMonth,
+    birthDateYear,
+    email,
+    password
+  ) => {
+    authService
+      .editProfile(
+        firstName,
+        lastName,
+        address,
+        country,
+        CP,
+        city,
+        state,
+        phoneNumber,
+        gender,
+        birthDateDay,
+        birthDateMonth,
+        birthDateYear,
+        email,
+        password
+      )
+      .then((email) => console.log("Updated profile"))
+      .catch((err) => {
+        console.log("Errorin updating profile");
+      });
+  };
+
   render() {
     const { isLoggedIn, isLoading, email } = this.state;
     const { signup, login, logout } = this;

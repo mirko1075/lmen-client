@@ -31,6 +31,7 @@ class App extends Component {
       cart: [],
       products: [],
       cartElements: 0,
+      favorites: [],
     };
     this.routerRef = React.createRef();
   }
@@ -39,18 +40,21 @@ class App extends Component {
     let user,
       products,
       cart = null;
+    let favorites = [];
+    let cartElements = 0;
     apiService
       .getAll()
       .then((productsFound) => {
-        console.log("All products :>> ", productsFound);
+        // console.log("All products :>> ", productsFound);
         products = productsFound;
         const pr = authService.me();
         return pr;
       })
       .then((foundUser) => {
-        console.log("FoundUser :>> ", foundUser);
+        // console.log("FoundUser :>> ", foundUser);
         if (foundUser) {
           user = foundUser;
+          favorites = user.favorites;
         } else {
           user = null;
         }
@@ -60,26 +64,22 @@ class App extends Component {
       })
       .then((foundCart) => {
         cart = foundCart;
-        console.log("cart from App componentDidMount :>> ", cart);
-        this.setState({ user, products, cart });
+        cartElements ? (cartElements += foundCart.amount) : (cartElements = 0);
+        // console.log("cart from App componentDidMount :>> ", cart);
+        this.setState({ user, products, cart, cartElements, favorites });
       })
       .catch((err) => {
         console.log("Error componentDidMount APP :>> ", err);
       });
   }
 
-  addProduct = (product, callback) => {
-    let products = this.state.products.slice();
-    products.push(product);
-    this.setState({ products }, () => callback && callback());
-  };
-
   addToCart = (cartItem) => {
-    console.log("this.state.cart :>> ", this.state.cart);
+    // console.log("this.state.cart :>> ", this.state.cart);
     let cart = this.state.cart;
-    console.log("cartItem :>> ", cartItem);
+    let cartElements = this.state.cartElements;
+    // console.log("cartItem :>> ", cartItem);
 
-    console.log("cart in state before update :>> ", cart);
+    // console.log("cart in state before update :>> ", cart);
     let foundElement = false;
     for (let i = 0; i < cart.length; i++) {
       const element = cart[i];
@@ -90,25 +90,29 @@ class App extends Component {
       ) {
         console.log("HERE");
         element.amount += cartItem.amount;
-        this.setState({ cartElements: element.amount });
+        // console.log("element.amount :>> ", element.amount, cartElements);
+        cartElements
+          ? (cartElements += element.amount)
+          : (cartElements = element.amount);
+        this.setState({ cartElements });
         foundElement = true;
       }
     }
     if (!foundElement) {
-      console.log("cart item to push :>> ", cartItem);
+      // console.log("cart item to push :>> ", cartItem);
 
       cart.push(cartItem);
     }
-    console.log("Cart after updating Arr :>> ", cart);
-
-    authService
-      .setCart(cart)
-      .then((userUpdated) => {
-        console.log("cart from APP set Cart :>> ", cart);
-        this.setState({ cart });
-        console.log("this.state.cart after updating DB :>> ", this.state);
-      })
-      .catch((err) => {});
+    // console.log("Cart after updating Arr :>> ", cart);
+    // I'm gonna update only at checkout
+    // authService
+    //   .setCart(cart)
+    //   .then((userUpdated) => {
+    //     console.log("cart from APP set Cart :>> ", cart);
+    //     this.setState({ cart });
+    //     console.log("this.state.cart after updating DB :>> ", this.state);
+    //   })
+    //   .catch((err) => {});
   };
 
   removeFromCart = (cartItemId) => {
@@ -116,8 +120,10 @@ class App extends Component {
     delete cart[cartItemId];
     authService
       .setCart(cart)
-      .then((cart) => {
-        this.setState(cart);
+      .then((userUpdated) => {
+        // console.log("cart from APP set Cart :>> ", cart);
+        this.setState({ cart });
+        // console.log("this.state.cart after updating DB :>> ", this.state);
       })
       .catch((err) => {});
   };
@@ -125,27 +131,34 @@ class App extends Component {
   clearCart = () => {
     let cart = [];
     authService
-      .setCart({ cart })
-      .then((cart) => {
-        this.setState({ cart: [] });
-        console.log("this.state :>> ", this.state);
+      .setCart(cart)
+      .then((userUpdated) => {
+        // console.log("cart from APP set Cart :>> ", cart);
+        this.setState({ cart });
+        // console.log("this.state.cart after updating DB :>> ", this.state);
       })
       .catch((err) => {});
   };
 
   checkout = () => {
     if (!this.state.user) {
-      this.routerRef.current.history.push("/private/Checkout");
+      this.routerRef.current.history.push("/login");
       return;
     }
 
     const cart = this.state.cart;
-    /// TO CHECK
+
     const products = this.state.products.map((p) => {
       if (cart[p.name]) {
         p.stock = p.stock - cart[p.name].amount;
-
-        // axios.put(`http://localhost:3001/api/products/${p.id}`, { ...p });
+        authService
+          .setAmount(p.name, p.stock)
+          .then((userUpdated) => {
+            // console.log("cart from APP set Cart :>> ", cart);
+            this.setState({ cart });
+            // console.log("this.state.cart after updating DB :>> ", this.state);
+          })
+          .catch((err) => {});
       }
       return p;
     });
@@ -153,6 +166,21 @@ class App extends Component {
     this.setState({ products });
     this.clearCart();
   };
+  addToFavorites = (productId, callback) => {
+    let favorites = this.state.favorites.slice();
+    // console.log("favorites :>> ", favorites);
+    favorites.push(productId);
+    this.setState({ favorites }, () => callback && callback());
+  };
+  removeFromFavorites = (productId, callback) => {};
+
+  // // FOR ADDING PRODUCTS FROM ADMIN FORM
+  // addProduct = (product, callback) => {
+  //   let products = this.state.products.slice();
+  //   products.push(product);
+  //   this.setState({ products }, () => callback && callback());
+  // };
+
   render() {
     const category = this.state.category;
     return (
@@ -218,7 +246,7 @@ class App extends Component {
               <Route path="*" component={NotFoundPage} />
             </Switch>
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Context.Provider>
     );

@@ -1,24 +1,54 @@
 import React, { Component } from "react";
+import withCartContext from "../context/withCartContext";
+import authService from "./../lib/auth-service";
 import { withAuth } from "./../context/auth-context";
 class EditProfile extends Component {
   state = {
-    firstName: "",
-    lastName: "",
-    address: "",
-    country: "",
-    CP: "",
-    city: "",
-    state: "",
-    phoneNumber: "",
-    gender: "",
-    birthDateDay: "",
-    birthDateMonth: "",
-    birthDateYear: "",
-    email: "",
-    password: "",
-    repeatpassword: "",
+    user: {},
   };
 
+  componentDidMount() {
+    const pr = authService
+      .user()
+      .then((user) => {
+        const {
+          firstName,
+          lastName,
+          address,
+          country,
+          CP,
+          city,
+          state,
+          phoneNumber,
+          gender,
+          birthDateDay,
+          birthDateMonth,
+          birthDateYear,
+          email,
+        } = user;
+        this.setState({
+          firstName,
+          lastName,
+          address,
+          country,
+          CP,
+          city,
+          state,
+          phoneNumber,
+          gender,
+          birthDateDay,
+          birthDateMonth,
+          birthDateYear,
+          email,
+        });
+
+        console.log("this.state :>> ", this.state);
+        return pr;
+      })
+      .catch((err) => {
+        console.log("Error retriving user");
+      });
+  }
   handleSignUpFormSubmit = (event) => {
     event.preventDefault();
     const {
@@ -36,9 +66,10 @@ class EditProfile extends Component {
       birthDateYear,
       email,
       password,
+      repeatpassword,
     } = this.state;
-
-    this.props.signup(
+    console.log(
+      "this.state :>> ",
       firstName,
       lastName,
       address,
@@ -52,8 +83,31 @@ class EditProfile extends Component {
       birthDateMonth,
       birthDateYear,
       email,
-      password
+      password,
+      repeatpassword
     );
+    authService
+      .editProfile(
+        firstName,
+        lastName,
+        address,
+        country,
+        CP,
+        city,
+        state,
+        phoneNumber,
+        gender,
+        birthDateDay,
+        birthDateMonth,
+        birthDateYear,
+        email,
+        password,
+        repeatpassword
+      )
+      .then((updatedUser) => console.log("Updated profile"))
+      .catch((err) => {
+        console.log("Errorin updating profile");
+      });
   };
 
   handleChange = (event) => {
@@ -80,176 +134,226 @@ class EditProfile extends Component {
       password,
       repeatpassword,
     } = this.state;
+    console.log("this.props :>> ", this.props);
     return (
       <div>
         <div>Edit Profile</div>
         <form onSubmit={this.handleSignUpFormSubmit}>
           <div>
-            <label for="password">First name</label>
+            <label htmlFor="firstName">First name</label>
           </div>
           <div>
             <input
               type="text"
               name="firstName"
-              value={firstName}
+              value={this.state.firstName}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <label for="lastName">Last name</label>
+            <label htmlFor="lastName">Last name</label>
           </div>
           <div>
             <input
               type="text"
               name="lastName"
-              value={lastName}
+              value={this.state.lastName}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <label for="address">Address</label>
+            <label htmlFor="address">Address</label>
           </div>
           <div>
             <input
               type="text"
               name="address"
-              value={address}
+              value={this.state.address}
               onChange={this.handleChange}
             />
           </div>
 
           <div>
-            <label for="country">Country</label>
+            <label htmlFor="country">Country</label>
           </div>
           <div>
             <input
               type="text"
               name="country"
-              value={country}
+              value={this.state.country}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <label for="CP">Zip code</label>
+            <label htmlFor="CP">Zip code</label>
           </div>
           <div>
             <input
               type="text"
               name="CP"
-              value={CP}
+              value={this.state.CP}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <label for="city">City</label>
+            <label htmlFor="city">City</label>
           </div>
           <div>
             <input
               type="text"
               name="city"
-              value={city}
+              value={this.state.city}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <label for="state">State / state</label>
+            <label htmlFor="state">State / state</label>
           </div>
           <div>
             <input
               type="text"
               name="state"
-              value={state}
+              value={this.state.state}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <label for="phoneNumber">Phone number</label>
+            <label htmlFor="phoneNumber">Phone number</label>
           </div>
           <div>
             <input
               type="text"
               name="phoneNumber"
-              value={phoneNumber}
+              value={this.state.phoneNumber}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <label for="birthDateDay">Birth date</label>
+            <label htmlFor="birthDateDay">Birth date</label>
           </div>
           <div>
             <input
               type="text"
               name="birthDateDay"
-              value={birthDateDay}
+              value={this.state.birthDateDay}
               onChange={this.handleChange}
             />
             /
             <input
               type="text"
               name="birthDateMonth"
-              value={birthDateMonth}
+              value={this.state.birthDateMonth}
               onChange={this.handleChange}
             />
             /
             <input
               type="text"
               name="birthDateYear"
-              value={birthDateYear}
+              value={this.state.birthDateYear}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <label for="gender">Gender</label>
+            <label htmlFor="gender">Gender</label>
           </div>
           <div>
-            {/* Male <input type="radio" name="gender" value="male" id="male" { gender === "male" ? "selected" : null} /> - Female
-              <input type="radio" name="gender" id="female" value="female" { gender === "female" ? "selected" : null} /> - Other
-              <input type="radio" name="gender" id="other" value="other" { gender === "other" ? "selected" : null} /> */}
-            Male <input type="radio" name="gender" value="male" id="male" /> -
-            Female
-            <input type="radio" name="gender" id="female" value="female" /> -
-            Other
-            <input type="radio" name="gender" id="other" value="other" />
+            Male{" "}
+            {this.state.gender === "male" ? (
+              <input
+                type="radio"
+                id="male"
+                name="gender"
+                value="male"
+                checked
+                onChange={this.handleChange}
+              />
+            ) : (
+              <input
+                type="radio"
+                id="male"
+                name="gender"
+                value="male"
+                onChange={this.handleChange}
+              />
+            )}{" "}
+            - Female{" "}
+            {this.state.gender === "female" ? (
+              <input
+                type="radio"
+                id="female"
+                name="gender"
+                value="female"
+                checked
+                onChange={this.handleChange}
+              />
+            ) : (
+              <input
+                type="radio"
+                id="female"
+                name="gender"
+                value="female"
+                onChange={this.handleChange}
+              />
+            )}
+            - Other{" "}
+            {this.state.gender === "other" ? (
+              <input
+                type="radio"
+                id="other"
+                name="gender"
+                value="other"
+                checked
+                onChange={this.handleChange}
+              />
+            ) : (
+              <input
+                type="radio"
+                id="other"
+                name="gender"
+                value="other"
+                onChange={this.handleChange}
+              />
+            )}
           </div>
           <div>
-            <label for="email">Email:</label>
+            <label htmlFor="email">Email:</label>
           </div>
           <div>
             <input
               type="text"
               name="email"
-              value={email}
+              value={this.state.email}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <label for="password">Password:</label>
+            <label htmlFor="password">Password:</label>
           </div>
           <div>
             <input
               type="password"
               name="password"
-              value={password}
+              value={this.state.password}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <label for="password">Repeat password:</label>
+            <label htmlFor="password">Repeat password:</label>
           </div>
           <div>
             <input
               type="password"
               name="repeatpassword"
-              value={repeatpassword}
+              value={this.state.repeatpassword}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <input type="submit" value="Signup" />
+            <input type="submit" value="Save data" />
           </div>
         </form>
       </div>
     );
   }
 }
-export default withAuth(EditProfile);
+export default withAuth(withCartContext(EditProfile));
