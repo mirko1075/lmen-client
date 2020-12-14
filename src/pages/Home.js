@@ -20,7 +20,7 @@ class ProductList extends Component {
     apiService
       .getAll()
       .then((products) => {
-        // console.log("All products :>> ", products);
+        console.log("All products :>> ", products);
         this.setState({ products });
       })
       .catch((err) => {
@@ -31,7 +31,7 @@ class ProductList extends Component {
     apiService
       .getForCategories(category)
       .then((products) => {
-        // console.log("Products for categories :>> ", products);
+        console.log("Products for categories :>> ", products);
         this.setState({ products });
       })
       .catch((err) => {
@@ -39,7 +39,7 @@ class ProductList extends Component {
       });
   };
   render() {
-    // console.log("this.props :>> ", this.props);
+    console.log("this.state :>> ", this.state);
     const productList = this.state.products;
     return (
       <div className="productListContDiv">

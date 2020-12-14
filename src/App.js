@@ -202,13 +202,15 @@ class App extends Component {
                 category={category}
                 component={ProductList}
               />
+              <AnonRoute exact path="/login" component={Login} />
+              <Route exact path="/Home" component={Home} />
               <Route
                 exact
                 path="/ProductList"
                 category={category}
                 component={ProductList}
               />
-              <Route exact path="/Home" component={Home} />
+              <Route exact path="/About" component={About} />
               <Route
                 exact
                 path="/ProductDetail/:id"
@@ -220,8 +222,6 @@ class App extends Component {
                 path="/ProductList/category/:category"
                 component={ProductList}
               />
-              <Route exact path="/About" component={About} />
-              <AnonRoute exact path="/login" component={Login} />
               <PrivateRoute
                 exact
                 path="/private/ViewProfile"
