@@ -9,7 +9,7 @@ class ProductList extends Component {
   constructor() {
     super();
     this.state = {
-      products: "",
+      products: [],
       favourites: [],
     };
   }
@@ -24,7 +24,7 @@ class ProductList extends Component {
     apiService
       .getAll()
       .then((products) => {
-        // console.log("All products :>> ", products);
+        //console.log("All products :>> ", products);
         this.setState({ products });
       })
       .catch((err) => {
