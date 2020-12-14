@@ -8,14 +8,15 @@ import authService from "./lib/auth-service";
 // Importing PAGES //
 
 import Cart from "./pages/Cart";
-import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ProductList from "./pages/ProductList";
 import ProductDetail from "./pages/ProductDetail";
 import ViewProfile from "./pages/ViewProfile";
 import EditProfile from "./pages/EditProfile";
 import Home from "./pages/Home";
+import About from "./pages/About";
 import Checkout from "./pages/Checkout";
+
 // Importing COMPONENTS //
 import Navbar from "./components/Navbar";
 import AddProduct from "./components/AddProduct";
@@ -214,7 +215,12 @@ class App extends Component {
                 component={ProductDetail}
               />
               <Route exact path="/category/:id" component={ProductList} />
-              <AnonRoute exact path="/signup" component={Signup} />
+              <Route
+                exact
+                path="/ProductList/category/:category"
+                component={ProductList}
+              />
+              <Route exact path="/About" component={About} />
               <AnonRoute exact path="/login" component={Login} />
               <PrivateRoute
                 exact

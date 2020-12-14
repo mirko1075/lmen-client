@@ -1,8 +1,8 @@
 import React from "react";
-import AddReview from "./AddReview";
+
 function ReviewCard(props) {
   const review = props.review;
-  const showAddReview = props.showAddReview;
+
   // console.log("showAddReview :>> ", showAddReview);
   // console.log("props.show :>> ", props.show);
   // console.log("updateReviews from ReviewCard :>> ", props);

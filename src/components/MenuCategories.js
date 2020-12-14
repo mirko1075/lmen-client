@@ -32,7 +32,7 @@ class MenuCategories extends Component {
           categories.map((category) => {
             return (
               <Link
-                to={"/ProductList"}
+                to={"/ProductList/category/" + category}
                 onClick={() => getCategoryProducts(category)}
                 key={category}
               >

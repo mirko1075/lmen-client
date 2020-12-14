@@ -149,6 +149,13 @@ class AuthService {
       .then((response) => response.data);
     return pr;
   }
+  postFavorite(productId, favourite) {
+    console.log("Updating favourite list :>> ", favourite);
+    const pr = this.auth
+      .post("/auth/favourites", { productId, favourite })
+      .then((response) => response.data);
+    return pr;
+  }
 }
 
 const authService = new AuthService();

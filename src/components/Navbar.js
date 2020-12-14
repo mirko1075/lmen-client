@@ -45,7 +45,10 @@ class Navbar extends Component {
                 <Link to={"/Home"}>Home</Link>
               </li>
               <li>
-                <Link to="/about">About</Link>
+                <Link to="/About">About</Link>
+              </li>
+              <li>
+                <Link to="/Contact">Contact</Link>
               </li>
               <li className="cart">
                 <Link to="/private/cart">

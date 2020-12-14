@@ -45,7 +45,8 @@ class Login extends Component {
       email,
       password,
     } = this.state;
-
+    if (!email) {
+    }
     this.props.signup(
       firstName,
       lastName,

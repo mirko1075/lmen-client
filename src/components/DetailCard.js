@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withCartContext from "../context/withCartContext";
 import ReviewCard from "../components/ReviewCard";
-import favoriteOn from "../images/favorite_remove.png";
-import favoriteOff from "../images/fav-add-icon.png";
+
 class DetailCard extends Component {
   state = {
     product: {},

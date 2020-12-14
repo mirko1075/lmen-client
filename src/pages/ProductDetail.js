@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import apiService from "./../lib/api-service";
+import authService from "./../lib/auth-service";
 import DetailCard from "../components/DetailCard";
 import { withAuth } from "./../context/auth-context";
 
@@ -77,9 +78,17 @@ class ProductDetail extends Component {
     let favorites = this.state.favorites;
     let isFavorite = this.state.isFavorite;
     console.log("favorites :>> ", favorites);
-    favorites.push(productId);
-    isFavorite = true;
-    this.setState({ favorites, isFavorite }, () => callback && callback());
+
+    const pr = authService
+      .postFavorite(productId, favorites)
+      .then((user) => {
+        console.log("Added to favourite created updated user:>> ", user);
+        favorites.push(productId);
+        isFavorite = true;
+        this.setState({ favorites, isFavorite }, () => callback && callback());
+        return pr;
+      })
+      .catch((err) => {});
   };
   removeFromFavorites = (productId, callback) => {
     console.log("this.state from Product Detail addToFav :>> ", this.state);

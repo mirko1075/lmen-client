@@ -12,7 +12,7 @@
 }
 /* /// PAGE 404 // */
 .mainbox {
-  background-color: #95c2de;
+  background-color: #333;
   margin: auto;
   height: 600px;
   width: 600px;
@@ -45,14 +45,32 @@
   top: 8%;
 }
 
+.err3 {
+  color: #ffffff;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 11rem;
+  position: absolute;
+  left: 44%;
+  top: 8%;
+}
+
 .msg {
   text-align: center;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   position: absolute;
   left: 16%;
   top: 45%;
   width: 75%;
+  color: white;
+}
+.msg a {
+  text-decoration: none;
+  color: white;
+}
+.msg a:hover {
+  text-decoration: none;
+  color: grey;
 }
 /* /// END OF PAGE 404 // */
 .logo {
@@ -135,6 +153,7 @@ nav {
 }
 .pageContent {
   margin-top: 270px; /* Add a top margin to avoid content overlay */
+  padding: 50px;
 }
 nav li {
   list-style: none;
@@ -292,9 +311,12 @@ nav li {
 }
 
 .loginDiv {
-  padding: 20px;
   display: flex;
+  justify-content: center;
   padding: 50px;
+  margin: 20px;
+  width: 80vw;
+  flex-wrap: wrap;
 }
 
 .authForm {

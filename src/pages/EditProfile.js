@@ -42,7 +42,7 @@ class EditProfile extends Component {
           email,
         });
 
-        console.log("this.state :>> ", this.state);
+        console.log("this.state from EditProfile Page:>> ", this.state);
         return pr;
       })
       .catch((err) => {
