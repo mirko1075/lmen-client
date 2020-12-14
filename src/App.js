@@ -31,7 +31,6 @@ class App extends Component {
       cart: [],
       products: [],
       cartElements: 0,
-      favorites: [],
     };
     this.routerRef = React.createRef();
   }
@@ -66,7 +65,7 @@ class App extends Component {
         cart = foundCart;
         cartElements ? (cartElements += foundCart.amount) : (cartElements = 0);
         // console.log("cart from App componentDidMount :>> ", cart);
-        this.setState({ user, products, cart, cartElements, favorites });
+        this.setState({ user, products, cart, cartElements });
       })
       .catch((err) => {
         console.log("Error componentDidMount APP :>> ", err);
@@ -134,7 +133,8 @@ class App extends Component {
       .setCart(cart)
       .then((userUpdated) => {
         // console.log("cart from APP set Cart :>> ", cart);
-        this.setState({ cart });
+        let cartElements = 0;
+        this.setState({ cart, cartElements });
         // console.log("this.state.cart after updating DB :>> ", this.state);
       })
       .catch((err) => {});
@@ -155,7 +155,8 @@ class App extends Component {
           .setAmount(p.name, p.stock)
           .then((userUpdated) => {
             // console.log("cart from APP set Cart :>> ", cart);
-            this.setState({ cart });
+            let cartElements = 0;
+            this.setState({ cart, cartElements });
             // console.log("this.state.cart after updating DB :>> ", this.state);
           })
           .catch((err) => {});
@@ -166,13 +167,6 @@ class App extends Component {
     this.setState({ products });
     this.clearCart();
   };
-  addToFavorites = (productId, callback) => {
-    let favorites = this.state.favorites.slice();
-    // console.log("favorites :>> ", favorites);
-    favorites.push(productId);
-    this.setState({ favorites }, () => callback && callback());
-  };
-  removeFromFavorites = (productId, callback) => {};
 
   // // FOR ADDING PRODUCTS FROM ADMIN FORM
   // addProduct = (product, callback) => {

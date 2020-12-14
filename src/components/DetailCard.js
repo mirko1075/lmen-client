@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withCartContext from "../context/withCartContext";
 import ReviewCard from "../components/ReviewCard";
-
+import favoriteOn from "../images/favorite_remove.png";
+import favoriteOff from "../images/fav-add-icon.png";
 class DetailCard extends Component {
   state = {
     product: {},
@@ -42,6 +43,17 @@ class DetailCard extends Component {
             <p>{product && product.name}</p>
             <br />
             <p>{product && product.description}</p>
+            {this.props.isFavorite ? (
+              <button
+                onClick={() => this.props.removeFromFavorites(product._id)}
+              >
+                ❤️
+              </button>
+            ) : (
+              <button onClick={() => this.props.addToFavorites(product._id)}>
+                🤍
+              </button>
+            )}
           </div>
 
           <div className="detailMainImg">
