@@ -10,14 +10,14 @@ class ProductList extends Component {
     super();
     this.state = {
       products: "",
-      favorites: [],
+      favourites: [],
     };
   }
   componentDidMount() {
     const { category } = this.props.match.params;
     console.log("this props from didMount :>> ", this.props.match.params);
     category ? this.getCategoryProducts(category) : this.getAllProducts();
-    this.setState({ favourites: this.props.user.favorites });
+    this.setState({ favourites: this.props.user.favourites });
   }
 
   getAllProducts = () => {
@@ -42,31 +42,31 @@ class ProductList extends Component {
         console.log(err);
       });
   };
-  addToFavorites = (productId, callback) => {
+  addToFavourites = (productId, callback) => {
     console.log("this.state from Product Detail addToFav :>> ", this.state);
-    let favorites = this.state.favorites;
+    let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    console.log("favorites :>> ", favorites);
+    console.log("favourites :>> ", favourites);
 
     const pr = authService
-      .postFavorite(productId, favorites)
+      .postFavorite(productId, favourites)
       .then((user) => {
         console.log("Added to favourite created updated user:>> ", user);
-        favorites.push(productId);
+        favourites.push(productId);
         isFavorite = true;
-        this.setState({ favorites, isFavorite }, () => callback && callback());
+        this.setState({ favourites, isFavorite }, () => callback && callback());
         return pr;
       })
       .catch((err) => {});
   };
-  removeFromFavorites = (productId, callback) => {
+  removeFromFavourites = (productId, callback) => {
     console.log("this.state from Product Detail addToFav :>> ", this.state);
-    let favorites = this.state.favorites;
+    let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    console.log("favorites :>> ", favorites);
-    favorites.splice(favorites.indexOf(productId), 1);
+    console.log("favourites :>> ", favourites);
+    favourites.splice(favourites.indexOf(productId), 1);
     isFavorite = false;
-    this.setState({ favorites, isFavorite }, () => callback && callback());
+    this.setState({ favourites, isFavorite }, () => callback && callback());
   };
   render() {
     console.log("this.props from product List :>> ", this.props.context);
@@ -79,14 +79,14 @@ class ProductList extends Component {
         </div>
         {productList &&
           productList.map((elem) => {
-            this.state.favorites.includes(elem._id)
+            this.state.favourites.includes(elem._id)
               ? (isFavorite = true)
               : (isFavorite = false);
             return (
               <div key={elem._id}>
                 <ListCard
-                  addToFavorites={this.addToFavorites}
-                  removeFromFavorites={this.removeFromFavorites}
+                  addToFavourites={this.addToFavourites}
+                  removeFromFavourites={this.removeFromFavourites}
                   isFavorite={isFavorite}
                   product={elem}
                 />

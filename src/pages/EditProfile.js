@@ -117,23 +117,6 @@ class EditProfile extends Component {
   };
 
   render() {
-    const {
-      firstName,
-      lastName,
-      address,
-      country,
-      CP,
-      city,
-      state,
-      phoneNumber,
-      gender,
-      birthDateDay,
-      birthDateMonth,
-      birthDateYear,
-      email,
-      password,
-      repeatpassword,
-    } = this.state;
     console.log("this.props :>> ", this.props);
     return (
       <div>

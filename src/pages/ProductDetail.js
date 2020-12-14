@@ -12,7 +12,7 @@ class ProductDetail extends Component {
     title: "",
     message: "",
     rate: "",
-    favorites: [],
+    favourites: [],
     isFavorite: false,
   };
 
@@ -35,13 +35,13 @@ class ProductDetail extends Component {
       .then((product) => {
         // console.log("product.review :>> ", product.review);
         const review = product.review;
-        let favorites = product.favorites;
+        let favourites = product.favourites;
         let isFavorite = false;
-        if (!favorites) favorites = [];
-        favorites.length && favorites.includes(id)
+        if (!favourites) favourites = [];
+        favourites.length && favourites.includes(id)
           ? (isFavorite = true)
           : (isFavorite = false);
-        this.setState({ product, review, favorites, isFavorite });
+        this.setState({ product, review, favourites, isFavorite });
 
         // console.log("ProductDetail state :>> ", this.state);
       })
@@ -70,34 +70,35 @@ class ProductDetail extends Component {
         console.log("Review created :>> ", review);
         updateReviews.push(review);
         this.setState({ review: updateReviews });
-      })
-      .catch((err) => {});
-  };
-  addToFavorites = (productId, callback) => {
-    console.log("this.state from Product Detail addToFav :>> ", this.state);
-    let favorites = this.state.favorites;
-    let isFavorite = this.state.isFavorite;
-    console.log("favorites :>> ", favorites);
-
-    const pr = authService
-      .postFavorite(productId, favorites)
-      .then((user) => {
-        console.log("Added to favourite created updated user:>> ", user);
-        favorites.push(productId);
-        isFavorite = true;
-        this.setState({ favorites, isFavorite }, () => callback && callback());
         return pr;
       })
       .catch((err) => {});
   };
-  removeFromFavorites = (productId, callback) => {
+  addToFavourites = (productId, callback) => {
     console.log("this.state from Product Detail addToFav :>> ", this.state);
-    let favorites = this.state.favorites;
+    let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    console.log("favorites :>> ", favorites);
-    favorites.splice(favorites.indexOf(productId), 1);
+    console.log("favourites :>> ", favourites);
+
+    const pr = authService
+      .postFavorite(productId, favourites)
+      .then((user) => {
+        console.log("Added to favourite created updated user:>> ", user);
+        favourites.push(productId);
+        isFavorite = true;
+        this.setState({ favourites, isFavorite }, () => callback && callback());
+        return pr;
+      })
+      .catch((err) => {});
+  };
+  removeFromFavourites = (productId, callback) => {
+    console.log("this.state from Product Detail addToFav :>> ", this.state);
+    let favourites = this.state.favourites;
+    let isFavorite = this.state.isFavorite;
+    console.log("favourites :>> ", favourites);
+    favourites.splice(favourites.indexOf(productId), 1);
     isFavorite = false;
-    this.setState({ favorites, isFavorite }, () => callback && callback());
+    this.setState({ favourites, isFavorite }, () => callback && callback());
   };
 
   render() {
@@ -106,8 +107,8 @@ class ProductDetail extends Component {
       <div className="productDetail">
         <DetailCard
           isFavorite={isFavorite}
-          addToFavorites={this.addToFavorites}
-          removeFromFavorites={this.removeFromFavorites}
+          addToFavourites={this.addToFavourites}
+          removeFromFavourites={this.removeFromFavourites}
           product={this.state.product}
           review={this.state.review}
         />

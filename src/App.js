@@ -40,7 +40,7 @@ class App extends Component {
     let user,
       products,
       cart = null;
-    let favorites = [];
+    let favourites = [];
     let cartElements = 0;
     apiService
       .getAll()
@@ -54,7 +54,7 @@ class App extends Component {
         // console.log("FoundUser :>> ", foundUser);
         if (foundUser) {
           user = foundUser;
-          favorites = user.favorites;
+          favourites = user.favourites;
         } else {
           user = null;
         }

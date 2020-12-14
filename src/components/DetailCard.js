@@ -44,12 +44,12 @@ class DetailCard extends Component {
             <p>{product && product.description}</p>
             {this.props.isFavorite ? (
               <button
-                onClick={() => this.props.removeFromFavorites(product._id)}
+                onClick={() => this.props.removeFromFavourites(product._id)}
               >
                 ❤️
               </button>
             ) : (
-              <button onClick={() => this.props.addToFavorites(product._id)}>
+              <button onClick={() => this.props.addToFavourites(product._id)}>
                 🤍
               </button>
             )}

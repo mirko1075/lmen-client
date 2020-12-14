@@ -4,7 +4,7 @@ import withCartContext from "../context/withCartContext";
 
 class ListCard extends Component {
   render() {
-    // console.log("props from ListCard :>> ", this.props.context.addToFavorites);
+    // console.log("props from ListCard :>> ", this.props.context.addToFavourites);
     const product = this.props.product;
     const imgWidth = "200";
     const imgHeight = "200";
@@ -26,11 +26,13 @@ class ListCard extends Component {
         </Link>
         <div>
           {this.props.isFavorite ? (
-            <button onClick={() => this.props.removeFromFavorites(product._id)}>
+            <button
+              onClick={() => this.props.removeFromFavourites(product._id)}
+            >
               ❤️
             </button>
           ) : (
-            <button onClick={() => this.props.addToFavorites(product._id)}>
+            <button onClick={() => this.props.addToFavourites(product._id)}>
               🤍
             </button>
           )}
