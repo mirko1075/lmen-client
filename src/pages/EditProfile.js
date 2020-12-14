@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import withCartContext from "../context/withCartContext";
 import authService from "./../lib/auth-service";
+import countriesService from "./../lib/countries-service";
 import { withAuth } from "./../context/auth-context";
 class EditProfile extends Component {
   state = {
     user: {},
+    countries: {},
+    cities: [{}],
   };
 
   componentDidMount() {
@@ -42,13 +45,26 @@ class EditProfile extends Component {
           email,
         });
 
-        console.log("this.state from EditProfile Page:>> ", this.state);
+        const pr = countriesService.getCountries();
         return pr;
       })
+      .then((countriesObj) => {
+        let { countries } = countriesObj;
+        this.setState({ countries });
+
+        const pr = countriesService.getCities;
+        return pr;
+      })
+      .then((citiesObj) => {
+        let { cities } = citiesObj;
+        this.setState({ cities });
+        console.log("this.state from EditProfile Page:>> ", this.state);
+      })
       .catch((err) => {
-        console.log("Error retriving user");
+        console.log("Error retriving countries and cities", err);
       });
   }
+
   handleSignUpFormSubmit = (event) => {
     event.preventDefault();
     const {
