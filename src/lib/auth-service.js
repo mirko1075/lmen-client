@@ -92,6 +92,7 @@ class AuthService {
     birthDateMonth,
     birthDateYear,
     email,
+    currentPassword,
     password,
     repeatpassword
   ) {
@@ -111,7 +112,9 @@ class AuthService {
       birthDateMonth,
       birthDateYear,
       email,
-      password
+      currentPassword,
+      password,
+      repeatpassword
     );
     const pr = this.auth
       .post("/auth/editProfile", {
@@ -128,7 +131,9 @@ class AuthService {
         birthDateMonth,
         birthDateYear,
         email,
+        currentPassword,
         password,
+        repeatpassword,
       })
 
       .then((response) => response.data);

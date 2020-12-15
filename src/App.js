@@ -66,10 +66,10 @@ class App extends Component {
         cart = foundCart;
         cartElements ? (cartElements += foundCart.amount) : (cartElements = 0);
         // console.log("cart from App componentDidMount :>> ", cart);
-        this.setState({ user, products, cart, cartElements });
+        this.setState({ user, products, cart, cartElements, favourites });
       })
       .catch((err) => {
-        console.log("Error componentDidMount APP :>> ", err);
+        console.log("Not found any User cart :>> ", err);
       });
   }
 

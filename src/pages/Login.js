@@ -81,7 +81,6 @@ class Login extends Component {
       city,
       state,
       phoneNumber,
-      gender,
       birthDateDay,
       birthDateMonth,
       birthDateYear,
@@ -89,7 +88,7 @@ class Login extends Component {
       password,
       repeatpassword,
     } = this.state;
-
+    // console.log("this.props from Login :>> ", this.props);
     return (
       <div className="loginDiv">
         <div className="authForm">
@@ -126,6 +125,9 @@ class Login extends Component {
 
             <div>
               <input type="submit" value="Login" />
+            </div>
+            <div>
+              {this.props.messageLogin ? this.props.messageLogin : null}
             </div>
           </form>
         </div>
@@ -256,11 +258,30 @@ class Login extends Component {
               {/* Male <input type="radio" name="gender" value="male" id="male" { gender === "male" ? "selected" : null} /> - Female
               <input type="radio" name="gender" id="female" value="female" { gender === "female" ? "selected" : null} /> - Other
               <input type="radio" name="gender" id="other" value="other" { gender === "other" ? "selected" : null} /> */}
-              Male <input type="radio" name="gender" value="male" id="male" /> -
-              Female
-              <input type="radio" name="gender" id="female" value="female" /> -
-              Other
-              <input type="radio" name="gender" id="other" value="other" />
+              Male{" "}
+              <input
+                type="radio"
+                name="gender"
+                value="male"
+                id="male"
+                onChange={this.handleChange}
+              />{" "}
+              - Female
+              <input
+                type="radio"
+                name="gender"
+                id="female"
+                value="female"
+                onChange={this.handleChange}
+              />{" "}
+              - Other
+              <input
+                type="radio"
+                name="gender"
+                id="other"
+                value="other"
+                onChange={this.handleChange}
+              />
             </div>
             <div>
               <label htmlFor="email">Email:</label>
@@ -297,6 +318,9 @@ class Login extends Component {
             </div>
             <div>
               <input type="submit" value="Signup" />
+            </div>
+            <div>
+              {this.props.messageSignup ? this.props.messageSignup : null}
             </div>
           </form>
         </div>

@@ -43,6 +43,9 @@ class EditProfile extends Component {
           birthDateMonth,
           birthDateYear,
           email,
+          currentPassword: "",
+          password: "",
+          repeatpassword: "",
         });
 
         const pr = countriesService.getCountries();
@@ -63,6 +66,7 @@ class EditProfile extends Component {
       .catch((err) => {
         console.log("Error retriving countries and cities", err);
       });
+    return pr;
   }
 
   handleSignUpFormSubmit = (event) => {
@@ -81,6 +85,7 @@ class EditProfile extends Component {
       birthDateMonth,
       birthDateYear,
       email,
+      currentPassword,
       password,
       repeatpassword,
     } = this.state;
@@ -99,6 +104,7 @@ class EditProfile extends Component {
       birthDateMonth,
       birthDateYear,
       email,
+      currentPassword,
       password,
       repeatpassword
     );
@@ -117,12 +123,13 @@ class EditProfile extends Component {
         birthDateMonth,
         birthDateYear,
         email,
+        currentPassword,
         password,
         repeatpassword
       )
       .then((updatedUser) => console.log("Updated profile"))
       .catch((err) => {
-        console.log("Errorin updating profile");
+        console.log("Error updating profile");
       });
   };
 
@@ -322,6 +329,17 @@ class EditProfile extends Component {
               type="text"
               name="email"
               value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Current password:</label>
+          </div>
+          <div>
+            <input
+              type="password"
+              name="currentPassword"
+              value={this.state.currentPassword}
               onChange={this.handleChange}
             />
           </div>

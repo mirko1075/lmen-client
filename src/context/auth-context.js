@@ -8,6 +8,8 @@ class AuthProvider extends React.Component {
     isLoggedIn: false,
     isLoading: true,
     email: null,
+    messageLogin: "",
+    messageSignup: "",
   };
 
   componentDidMount() {
@@ -56,7 +58,8 @@ class AuthProvider extends React.Component {
       )
       .then((email) => this.setState({ isLoggedIn: true, email }))
       .catch((err) => {
-        this.setState({ isLoggedIn: false, email: null });
+        const messageSignup = err.response.data.message;
+        this.setState({ isLoggedIn: false, email: null, messageSignup });
       });
   };
 
@@ -65,7 +68,8 @@ class AuthProvider extends React.Component {
       .login(email, password)
       .then((email) => this.setState({ isLoggedIn: true, email }))
       .catch((err) => {
-        this.setState({ isLoggedIn: false, email: null });
+        const messageLogin = err.response.data.message;
+        this.setState({ isLoggedIn: false, email: null, messageLogin });
       });
   };
 
@@ -116,13 +120,29 @@ class AuthProvider extends React.Component {
   };
 
   render() {
-    const { isLoggedIn, isLoading, email } = this.state;
+    const {
+      isLoggedIn,
+      isLoading,
+      email,
+      messageLogin,
+      messageSignup,
+    } = this.state;
     const { signup, login, logout } = this;
-
     if (isLoading) return <p>Loading</p>;
 
     return (
-      <Provider value={{ isLoggedIn, isLoading, email, signup, login, logout }}>
+      <Provider
+        value={{
+          isLoggedIn,
+          isLoading,
+          email,
+          signup,
+          login,
+          logout,
+          messageLogin,
+          messageSignup,
+        }}
+      >
         {this.props.children}
       </Provider>
     );
@@ -143,6 +163,8 @@ const withAuth = (WrappedComponent) => {
               signup,
               login,
               logout,
+              messageLogin,
+              messageSignup,
             } = value;
 
             return (
@@ -154,6 +176,8 @@ const withAuth = (WrappedComponent) => {
                 signup={signup}
                 login={login}
                 logout={logout}
+                messageLogin={messageLogin}
+                messageSignup={messageSignup}
               />
             );
           }}
