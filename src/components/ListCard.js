@@ -1,10 +1,43 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withCartContext from "../context/withCartContext";
-
+import authService from "./../lib/auth-service";
 class ListCard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      products: "",
+      favourites: [],
+    };
+  }
+  addToFavourites = (productId, callback) => {
+    console.log("this.state from Home addToFav :>> ", this.state);
+    let favourites = this.state.favourites;
+    let isFavorite = this.state.isFavorite;
+    console.log("favourites :>> ", favourites);
+
+    const pr = authService
+      .postFavorite(productId, favourites)
+      .then((user) => {
+        console.log("Added to favourite created updated user:>> ", user);
+        favourites.push(productId);
+        isFavorite = true;
+        this.setState({ favourites, isFavorite }, () => callback && callback());
+        return pr;
+      })
+      .catch((err) => {});
+  };
+  removeFromFavourites = (productId, callback) => {
+    console.log("this.state from Home removeFromFav :>> ", this.state);
+    let favourites = this.state.favourites;
+    let isFavorite = this.state.isFavorite;
+    console.log("favourites :>> ", favourites);
+    favourites.splice(favourites.indexOf(productId), 1);
+    isFavorite = false;
+    this.setState({ favourites, isFavorite }, () => callback && callback());
+  };
   render() {
-    console.log("props from ListCard :>> ", this.props);
+    // console.log("props from ListCard :>> ", this.props);
     const product = this.props.product;
     const imgWidth = "200";
     const imgHeight = "200";
@@ -25,14 +58,12 @@ class ListCard extends Component {
           </div>
         </Link>
         <div>
-          {this.props.isFavorite ? (
-            <button
-              onClick={() => this.props.removeFromFavourites(product._id)}
-            >
+          {this.state.isFavorite ? (
+            <button onClick={() => this.removeFromFavourites(product._id)}>
               ❤️
             </button>
           ) : (
-            <button onClick={() => this.props.addToFavourites(product._id)}>
+            <button onClick={() => this.addToFavourites(product._id)}>
               🤍
             </button>
           )}
