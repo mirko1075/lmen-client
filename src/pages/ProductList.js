@@ -16,7 +16,7 @@ class ProductList extends Component {
   componentDidMount() {
     let { category } = this.props.match.params;
     let favourites = [];
-    console.log("this props from didMount :>> ", this.props.match.params);
+    // console.log("this props from didMount :>> ", this.props.match.params);
     !category ? (category = "") : (category = category);
     category ? this.getCategoryProducts(category) : this.getAllProducts();
     this.props.user
@@ -48,15 +48,15 @@ class ProductList extends Component {
       });
   };
   addToFavourites = (productId, callback) => {
-    console.log("this.state from Product Detail addToFav :>> ", this.state);
+    // console.log("this.state from Product Detail addToFav :>> ", this.state);
     let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    console.log("favourites :>> ", favourites);
+    // console.log("favourites :>> ", favourites);
 
     const pr = authService
       .postFavorite(productId, favourites)
       .then((user) => {
-        console.log("Added to favourite created updated user:>> ", user);
+        // console.log("Added to favourite created updated user:>> ", user);
         favourites.push(productId);
         isFavorite = true;
         this.setState({ favourites, isFavorite }, () => callback && callback());
@@ -65,16 +65,16 @@ class ProductList extends Component {
       .catch((err) => {});
   };
   removeFromFavourites = (productId, callback) => {
-    console.log("this.state from Product Detail addToFav :>> ", this.state);
+    // console.log("this.state from Product Detail addToFav :>> ", this.state);
     let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    console.log("favourites :>> ", favourites);
+    // console.log("favourites :>> ", favourites);
     favourites.splice(favourites.indexOf(productId), 1);
     isFavorite = false;
     this.setState({ favourites, isFavorite }, () => callback && callback());
   };
   render() {
-    console.log("this.props from product List :>> ", this.props.context);
+    // console.log("this.props from product List :>> ", this.props.context);
     let isFavorite = false;
     const productList = this.state.products;
     return (
