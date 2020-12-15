@@ -262,7 +262,7 @@ class App extends Component {
               <Route path="*" component={NotFoundPage} />
             </Switch>
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </Context.Provider>
     );

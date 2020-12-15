@@ -165,6 +165,14 @@ class ProductDetail extends Component {
             </div>
           ) : null}
         </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     );
   }
