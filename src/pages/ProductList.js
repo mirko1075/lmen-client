@@ -79,7 +79,7 @@ class ProductList extends Component {
         </div>
         {productList &&
           productList.map((elem) => {
-            this.state.favourites.includes(elem._id)
+            this.state.favourites && this.state.favourites.includes(elem._id)
               ? (isFavorite = true)
               : (isFavorite = false);
             return (

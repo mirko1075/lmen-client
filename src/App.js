@@ -168,7 +168,23 @@ class App extends Component {
     this.setState({ products });
     this.clearCart();
   };
+  addToFavourites = (productId, callback) => {
+    console.log("this.state from Home addToFav :>> ", this.state);
+    let favourites = this.state.favourites;
+    let isFavorite = this.state.isFavorite;
+    console.log("favourites :>> ", favourites);
 
+    const pr = authService
+      .postFavorite(productId, favourites)
+      .then((user) => {
+        console.log("Added to favourite created updated user:>> ", user);
+        favourites.push(productId);
+        isFavorite = true;
+        this.setState({ favourites, isFavorite }, () => callback && callback());
+        return pr;
+      })
+      .catch((err) => {});
+  };
   // // FOR ADDING PRODUCTS FROM ADMIN FORM
   // addProduct = (product, callback) => {
   //   let products = this.state.products.slice();

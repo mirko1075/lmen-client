@@ -4,7 +4,7 @@ import withCartContext from "../context/withCartContext";
 
 class ListCard extends Component {
   render() {
-    // console.log("props from ListCard :>> ", this.props.context.addToFavourites);
+    console.log("props from ListCard :>> ", this.props);
     const product = this.props.product;
     const imgWidth = "200";
     const imgHeight = "200";
