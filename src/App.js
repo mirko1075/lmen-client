@@ -69,7 +69,7 @@ class App extends Component {
         this.setState({ user, products, cart, cartElements, favourites });
       })
       .catch((err) => {
-        console.log("Error componentDidMount APP :>> ", err);
+        console.log("Not found any User cart :>> ", err);
       });
   }
 
