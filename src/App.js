@@ -88,7 +88,7 @@ class App extends Component {
         element.id === cartItem.id &&
         element.amount + cartItem.amount <= element.product.stock
       ) {
-        console.log("HERE");
+        // console.log("HERE");
         element.amount += cartItem.amount;
         // console.log("element.amount :>> ", element.amount, cartElements);
         cartElements

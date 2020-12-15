@@ -27,7 +27,7 @@ class DetailCard extends Component {
 
   render() {
     const { product, review } = this.state;
-    console.log("props from DetailCard :>> ", this.props);
+    // console.log("props from DetailCard :>> ", this.props);
     const imgWidth = "150";
     const imgHeight = "150";
     const addToCart = this.props.context.addToCart;

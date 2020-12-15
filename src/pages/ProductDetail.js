@@ -26,7 +26,7 @@ class ProductDetail extends Component {
       : this.setState({ showAddReview: true });
   };
   updateReviews = (id) => {
-    console.log("UpdateReviews running");
+    // console.log("UpdateReviews running");
     this.getOneProduct(id);
   };
   getOneProduct = (id) => {
@@ -67,7 +67,7 @@ class ProductDetail extends Component {
         this.state.rate
       )
       .then((review) => {
-        console.log("Review created :>> ", review);
+        // console.log("Review created :>> ", review);
         updateReviews.push(review);
         this.setState({ review: updateReviews });
         return pr;
@@ -75,15 +75,15 @@ class ProductDetail extends Component {
       .catch((err) => {});
   };
   addToFavourites = (productId, callback) => {
-    console.log("this.state from Product Detail addToFav :>> ", this.state);
+    // console.log("this.state from Product Detail addToFav :>> ", this.state);
     let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    console.log("favourites :>> ", favourites);
+    // console.log("favourites :>> ", favourites);
 
     const pr = authService
       .postFavorite(productId, favourites)
       .then((user) => {
-        console.log("Added to favourite created updated user:>> ", user);
+        // console.log("Added to favourite created updated user:>> ", user);
         favourites.push(productId);
         isFavorite = true;
         this.setState({ favourites, isFavorite }, () => callback && callback());
@@ -92,10 +92,10 @@ class ProductDetail extends Component {
       .catch((err) => {});
   };
   removeFromFavourites = (productId, callback) => {
-    console.log("this.state from Product Detail addToFav :>> ", this.state);
+    // console.log("this.state from Product Detail addToFav :>> ", this.state);
     let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    console.log("favourites :>> ", favourites);
+    // console.log("favourites :>> ", favourites);
     favourites.splice(favourites.indexOf(productId), 1);
     isFavorite = false;
     this.setState({ favourites, isFavorite }, () => callback && callback());
