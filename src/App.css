@@ -1,14 +1,73 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+/* --- CSS VARIABLES --- */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/var */
+:root {
+  --text-color: black;
+  /* #2a8c47; */
+  --green-color: grey;
+}
+
+/* GENERAL STYLES */
+
+body {
+  font-family: "Roboto", "Verdana", sans-serif;
+  font-weight: 400;
+  line-height: normal;
+}
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+a:hover {
+  color: var(--green-color);
+}
+
+h1 {
+  font-size: 70px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: var(--text-color);
+  font-size: 8px;
+  display: inline;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+}
+
+h3 {
+  color: var(--text-color);
+  font-size: 26px;
+}
+h4 {
+  color: var(--text-color);
+  font-size: 20px;
+}
+th,
+td {
+  padding: 5px;
+  text-align: left;
+}
+
+.sessionicon {
+  width: 20px;
+  height: auto;
+}
+
+/* END GENERAL STYLES */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  color: black;
 }
+
 .container {
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
 }
 /* /// PAGE 404 // */
 .mainbox {
@@ -91,26 +150,20 @@
   align-items: center;
   align-content: center;
 }
-.logoDiv {
-  position: absolute;
-  z-index: 1;
-  top: 110px;
-  left: 0;
-  height: 200px;
-  right: 0;
-  bottom: 0;
-  padding: 0 !important;
-  margin: 0 !important;
-  text-align: center;
+
+.carousel {
+  background-color: #333;
+  width: 1920px;
+  padding: 0;
+  margin: 0;
 }
-.header {
-  display: flex;
+
+.caroselImg {
+  width: 100vw;
 }
 .navDiv {
   overflow: hidden;
   background-color: #333;
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
 }
 
@@ -122,24 +175,8 @@
   align-items: center;
   align-content: center;
 }
-/* .overlay {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  height: 100%;
-  right: 0;
-  bottom: 0;
-  padding: 0 !important;
-  margin: 0 !important;
-  background-color: rgba(10, 10, 10, 0.3);
-} */
+/* HEADER */
 nav {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 2;
   align-self: flex-start;
   display: flex;
   flex-wrap: wrap;
@@ -147,13 +184,21 @@ nav {
   padding: 20px 20px 0 20px;
   overflow: hidden;
   background-color: #333;
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
+  width: 100vw; /* Full width */
+}
+
+.logoDiv {
+  right: 0;
+  bottom: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: center;
+}
+.header {
+  display: flex;
+  flex-direction: column;
 }
 .pageContent {
-  margin-top: 270px; /* Add a top margin to avoid content overlay */
-  padding: 50px;
 }
 nav li {
   list-style: none;
@@ -191,13 +236,12 @@ nav li {
 }
 
 .listCard {
-  width: 10vw;
-  height: 40vh;
+  width: 200px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
-  border: 1px solid grey;
+  padding: 0px;
   margin: 10px;
 }
 .listCard div {
@@ -212,7 +256,15 @@ nav li {
   align-self: center;
 }
 .productListImg {
-  width: 10vw;
+  width: 200px;
+}
+.productListItem {
+  font-size: 12px;
+  columns: #f5f5f5;
+}
+.productListPrice {
+  font-size: 13px;
+  color: #000;
 }
 .detailImage {
   border-radius: 30px;
@@ -223,16 +275,12 @@ nav li {
   background-color: #333;
   height: 50px;
   width: 100%;
-  border-top: 50px transparent;
-  position: absolute;
-  top: 210px;
-  right: 0;
-  left: 0;
-  z-index: 1;
   align-self: flex-start;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding: 0;
+  margin: 0;
 }
 .menuCategories div {
   background-color: #333;
@@ -272,38 +320,31 @@ nav li {
   text-align: center;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 2;
   display: flex;
   flex-wrap: wrap;
-  align-self: flex-start;
   justify-content: space-between;
+  align-items: center;
+  align-content: center;
   padding: 10px 60px 10px 60px;
-  overflow: hidden;
   background-color: #333;
-  position: fixed; /* Set the navbar to fixed position */
   width: 100%; /* Full width */
+  height: 60px;
+}
+.FooterDivs {
+  color: white;
 }
 .FooterDivs div {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: flex-start;
-  justify-content: space-around;
-  font-size: 0.5rem;
-  line-height: 1.2;
+  color: white;
 }
 .FooterDivs a {
   text-decoration: none;
   color: white;
 }
 .FooterDivs h4 {
+  color: white;
   text-decoration: none;
   color: #999;
-  font-size: 0.5rem;
+  font-size: 12px;
 }
 
 .socials {
@@ -375,4 +416,27 @@ nav li {
 .favoriteImg {
   width: 10px;
   height: auto;
+}
+
+.contactDiv {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+.contactFormDiv {
+  width: 100vw;
+  height: 47vh;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.contactFormDiv div {
+  width: 100vw;
+  text-align: center;
+}
+.contactImg {
+  width: 800px;
+  height: 200px;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./cssReset.css";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import Context from "./context/cart-context";
@@ -15,6 +16,7 @@ import ViewProfile from "./pages/ViewProfile";
 import EditProfile from "./pages/EditProfile";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 import Checkout from "./pages/Checkout";
 
 // Importing COMPONENTS //
@@ -227,6 +229,7 @@ class App extends Component {
                 component={ProductList}
               />
               <Route exact path="/About" component={About} />
+              <Route exact path="/Contact" component={Contact} />
               <Route
                 exact
                 path="/ProductDetail/:id"
@@ -263,6 +266,7 @@ class App extends Component {
             </Switch>
           </div>
           <Footer />
+          <script async src="https://static.addtoany.com/menu/page.js"></script>
         </div>
       </Context.Provider>
     );

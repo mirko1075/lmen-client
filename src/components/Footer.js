@@ -1,30 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import MenuCategories from "./../components/MenuCategories";
-
 export default function Footer() {
   return (
     <div className="footer">
       <div className="FooterDivs">
-        <h4>Buy online</h4>
-        <MenuCategories />
+        <Link>Privacy policy</Link> | <Link>Cookies policy</Link> |{" "}
+        <Link>Contact</Link>
       </div>
       <div className="FooterDivs">
-        <h4>Customer care</h4>
-        <div>
-          <Link to="#">Returns and refound</Link>
-          <Link to="#">Delivery</Link>
-          <Link to="#">Security and payments</Link>
-          <Link to="#">F.A.Q</Link>
-          <Link to="#">Contact us</Link>
-        </div>
+        © 2020 LM&N Confeccion - Brasil - All rigths reserved
       </div>
       <div className="FooterDivs">
         <h4>Follow us on</h4>
-        <div className="socials">
+        <div class="a2a_kit a2a_kit_size_32 a2a_default_style a2a_follow">
           {/* <!-- ShareThis BEGIN --> */}
-          <div className="sharethis-inline-follow-buttons"></div>
+          <Link class="a2a_button_facebook" data-a2a-follow="AddToAny">
+            JJJJ
+          </Link>
           {/* <!-- ShareThis END --> */}
         </div>
       </div>

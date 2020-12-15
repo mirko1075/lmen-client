@@ -43,7 +43,6 @@ class ListCard extends Component {
     const imgHeight = "200";
     return (
       <div className="listCard">
-        {" "}
         <Link to={"/productDetail/" + product._id}>
           <div>
             <img
@@ -52,22 +51,11 @@ class ListCard extends Component {
               className="productListImg"
             />
           </div>
-          <div>
-            <h2 className="productListItem">{product.name}</h2>
-            <p>{product.price} € -- BUY</p>
+          <div className="productDetailName">
+            <p className="productListItem">{product.name}</p>
+            <p className="productListPrice">{product.price} €</p>
           </div>
         </Link>
-        <div>
-          {this.state.isFavorite ? (
-            <button onClick={() => this.removeFromFavourites(product._id)}>
-              ❤️
-            </button>
-          ) : (
-            <button onClick={() => this.addToFavourites(product._id)}>
-              🤍
-            </button>
-          )}
-        </div>
       </div>
     );
   }
