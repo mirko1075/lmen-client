@@ -14,9 +14,15 @@ class ProductList extends Component {
     };
   }
   componentDidMount() {
-    const category = this.props.category;
-    // console.log("this props from didMount :>> ", this.props);
+    let { category } = this.props.match.params;
+    let favourites = [];
+    console.log("this props from didMount :>> ", this.props.match.params);
+    category ? (category = "") : (category = category);
     category ? this.getCategoryProducts(category) : this.getAllProducts();
+    this.props.user
+      ? (favourites = this.props.user.favourites)
+      : (favourites = []);
+    this.setState({ favourites });
   }
 
   getAllProducts = () => {
