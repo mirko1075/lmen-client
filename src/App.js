@@ -214,12 +214,7 @@ class App extends Component {
           </header>
           <div className="pageContent">
             <Switch>
-              <Route
-                exact
-                path="/"
-                category={category}
-                component={ProductList}
-              />
+              <Route exact path="/" category={category} component={Home} />
               <AnonRoute exact path="/login" component={Login} />
               <Route exact path="/Home" component={Home} />
               <Route
