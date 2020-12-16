@@ -36,8 +36,8 @@ export default function About() {
         <div>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.584576147727!2d-56.486805884577095!3d-21.129122085944083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x947c5f25355f3dcd%3A0x53790ff9682adec9!2sR.%20Quinze%20de%20Novembro%2C%20862%20-%20Alvorada%2C%20Bonito%20-%20MS%2C%2079290-000%2C%20Brasil!5e0!3m2!1ses!2ses!4v1608104516493!5m2!1ses!2ses"
-            width="300"
-            height="150"
+            width="400"
+            height="400"
             frameBorder="0"
             allowFullScreen=""
             aria-hidden="false"
