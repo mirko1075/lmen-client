@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withAuth } from "./../context/auth-context";
+import countryService from "./../lib/countries-service";
 
 class Login extends Component {
   state = {
@@ -18,11 +19,47 @@ class Login extends Component {
     email: "",
     password: "",
     repeatpassword: "",
+    countriesCities: [],
+    loginErr: "",
+    signupErr: "",
   };
-
+  componentDidMount() {
+    const countriesCities = [];
+    const pr = countryService
+      .getCountries()
+      .then((countriesFound) => {
+        let countries = Object.keys(countriesFound.countries);
+        console.log("countries :>> ", countries);
+        for (let i = 0; i < countries.length; i++) {
+          let country = countries[i];
+          console.log("country :>> ", country);
+          const pr = countryService
+            .getCities(country)
+            .then((cities) => {
+              let countriesCitiesObj = { country, cities };
+              countriesCities.push(countriesCitiesObj);
+            })
+            .catch((err) => {
+              console.log("Error loading cities :>> ", err);
+            });
+          return pr;
+        }
+        this.setState({ countriesCities });
+        console.log(
+          "this.state.countriesCities :>> ",
+          this.state.countriesCities
+        );
+      })
+      .catch((err) => {});
+    return pr;
+  }
   handleLoginFormSubmit = (event) => {
     event.preventDefault();
     const { email, password } = this.state;
+    if (!email || !password) {
+      this.setState({ loginErr: "Provide username and password" });
+      return;
+    }
     // Call funciton coming from AuthProvider ( via withAuth )
     this.props.login(email, password);
   };
@@ -44,9 +81,16 @@ class Login extends Component {
       birthDateYear,
       email,
       password,
+      repeatpassword,
     } = this.state;
-    if (!email) {
+    if (!email || !password || repeatpassword) {
+      this.setState({ signupErr: "Email and password are mandatory" });
+      return;
+    } else if (password !== repeatpassword) {
+      this.setState({ signupErr: "The 2 passwords don't match" });
+      return;
     }
+
     this.props.signup(
       firstName,
       lastName,
@@ -126,8 +170,9 @@ class Login extends Component {
             <div>
               <input type="submit" value="Login" />
             </div>
-            <div>
+            <div id="loginErr" className="formErr">
               {this.props.messageLogin ? this.props.messageLogin : null}
+              {this.state.loginErr ? this.state.loginErr : null}
             </div>
           </form>
         </div>
@@ -137,6 +182,39 @@ class Login extends Component {
             <h1>Sign Up</h1>
           </div>
           <form onSubmit={this.handleSignUpFormSubmit}>
+            <div>
+              <label htmlFor="email">*Email:</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="password">*Password:</label>
+            </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="password">*Repeat password:</label>
+            </div>
+            <div>
+              <input
+                type="password"
+                name="repeatpassword"
+                value={repeatpassword}
+                onChange={this.handleChange}
+              />
+            </div>
             <div>
               <label htmlFor="password">First name</label>
             </div>
@@ -284,43 +362,11 @@ class Login extends Component {
               />
             </div>
             <div>
-              <label htmlFor="email">Email:</label>
-            </div>
-            <div>
-              <input
-                type="text"
-                name="email"
-                value={email}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Password:</label>
-            </div>
-            <div>
-              <input
-                type="password"
-                name="password"
-                value={password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Repeat password:</label>
-            </div>
-            <div>
-              <input
-                type="password"
-                name="repeatpassword"
-                value={repeatpassword}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div>
               <input type="submit" value="Signup" />
             </div>
-            <div>
+            <div id="signupErr" className="formErr">
               {this.props.messageSignup ? this.props.messageSignup : null}
+              {this.state.signupErr ? this.state.signupErr : null}
             </div>
           </form>
         </div>

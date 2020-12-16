@@ -124,7 +124,6 @@ class ProductDetail extends Component {
                 product={this.state.product}
                 review={this.state.review}
               />
-              <div className="blackBar"></div>
               <ReviewCard
                 product={this.state.product}
                 review={this.state.review}

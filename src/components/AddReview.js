@@ -52,14 +52,22 @@ class AddReview extends Component {
           </div>
           <div>
             <textarea
-              rows={100}
-              cols={30}
-              value={this.state.message}
-              onChange={(event) => this.handleChange(event)}
+              className=""
+              cols="20"
+              id="message"
+              name="message"
+              rows="4"
+              onChange={this.handleChange}
             >
               {this.state.message}
             </textarea>
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <div>
             <label htmlFor="rate">rate</label>
           </div>

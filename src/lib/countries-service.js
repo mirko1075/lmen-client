@@ -9,7 +9,10 @@ class CountriesService {
   constructor() {
     this.api = axios.create({
       baseURL: "https://countries-cities.p.rapidapi.com/location/country",
-      withCredentials: true,
+      headers: {
+        "x-rapidapi-key": "1bf6ccaf8emsha0a832033af9ea6p13172bjsn5177d51836c4",
+        "x-rapidapi-host": "countries-cities.p.rapidapi.com",
+      },
     });
   }
 

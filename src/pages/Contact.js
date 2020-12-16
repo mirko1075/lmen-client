@@ -65,7 +65,12 @@ export default class Contact extends Component {
                 </label>
               </div>
               <div className="">
-                <select id="select-topic" name="SelectedArgument" className="">
+                <select
+                  id="select-topic"
+                  name="SelectedArgument"
+                  className="select-css"
+                >
+                  <option value=""></option>
                   <option value="Order">Order</option>
                   <option value="Payment">Payment</option>
                   <option value="Product">Product</option>
