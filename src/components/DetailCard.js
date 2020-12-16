@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withCartContext from "../context/withCartContext";
-
+import authService from "./../lib/auth-service";
 class DetailCard extends Component {
   state = {
     product: {},
@@ -23,55 +23,88 @@ class DetailCard extends Component {
       this.setState({ product, review });
     }
   }
+  addToFavourites = (productId, callback) => {
+    // console.log("this.state from Product Detail addToFav :>> ", this.state);
+    let favourites = this.state.favourites;
+    let isFavorite = this.state.isFavorite;
+    // console.log("favourites :>> ", favourites);
 
+    const pr = authService
+      .postFavorite(productId, favourites)
+      .then((user) => {
+        // console.log("Added to favourite created updated user:>> ", user);
+        favourites.push(productId);
+        isFavorite = true;
+        this.setState({ favourites, isFavorite }, () => callback && callback());
+        return pr;
+      })
+      .catch((err) => {});
+  };
+  removeFromFavourites = (productId, callback) => {
+    // console.log("this.state from Product Detail addToFav :>> ", this.state);
+    let favourites = this.state.favourites;
+    let isFavorite = this.state.isFavorite;
+    // console.log("favourites :>> ", favourites);
+    favourites.splice(favourites.indexOf(productId), 1);
+    isFavorite = false;
+    this.setState({ favourites, isFavorite }, () => callback && callback());
+  };
   render() {
     const { product, review } = this.state;
     // console.log("props from DetailCard :>> ", this.props);
-    const imgWidth = "150";
-    const imgHeight = "150";
+    const imgWidth = "100";
+    const imgHeight = "100";
     const addToCart = this.props.context.addToCart;
     // console.log("addToCart :>> ", addToCart);
     console.log("this.state from product Detail   :>> ", this.state);
     // console.log("this.props from product Detail :>> ", this.props.context);
 
     return (
-      <div className="detailCard">
+      <div className="detailCardCont">
         <div>
-          <div className="detailMainImg">
-            <img
-              src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_${imgWidth},h_${imgHeight},c_scale/${product.image}_1.jpg`}
-              alt=""
-              className="detailImage"
-            />
-          </div>
-          <div className="detailImgBox">
-            <div>
+          {"Category >> "}
+          <Link to={"/ProductList/category/" + product.category}>
+            {product.category}
+          </Link>
+        </div>
+        <div className="detailCard">
+          <div>
+            <div className="detailMainImg">
               <img
-                src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_${imgWidth},h_${imgHeight},c_scale/${this.state.img2}.jpg`}
+                src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1607543487/${product.image}_1.jpg`}
                 alt=""
                 className="detailImage"
               />
             </div>
-            <div>
-              <img
-                src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_${imgWidth},h_${imgHeight},c_scale/${this.state.img3}.jpg`}
-                alt=""
-                className="detailImage"
-              />
-            </div>
-            <div>
-              <img
-                src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_${imgWidth},h_${imgHeight},c_scale/${this.state.img4}.jpg`}
-                alt=""
-                className="detailImage"
-              />
-            </div>
-            <div>
-              <img
-                src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_${imgWidth},h_${imgHeight},c_scale/${this.state.img5}.jpg`}
-                alt=""
-                className="detailImage"
-              />
+            <div className="detailImgBox">
+              <div>
+                <img
+                  src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1607543487/${this.state.img2}.jpg`}
+                  alt=""
+                  className="detailImage"
+                />
+              </div>
+              <div>
+                <img
+                  src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1607543487/${this.state.img3}.jpg`}
+                  alt=""
+                  className="detailImage"
+                />
+              </div>
+              <div>
+                <img
+                  src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1607543487/${this.state.img4}.jpg`}
+                  alt=""
+                  className="detailImage"
+                />
+              </div>
+              <div>
+                <img
+                  src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1607543487/${this.state.img5}.jpg`}
+                  alt=""
+                  className="detailImage"
+                />
+              </div>
             </div>
           </div>
         </div>

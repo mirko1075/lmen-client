@@ -4,17 +4,22 @@ function ReviewCard(props) {
   const review = props.review;
   console.log("updateReviews from ReviewCard :>> ", props);
   return (
-    <div>
+    <div className="review">
+      <h4>{review.length} Reviews</h4>
       {review.length ? (
         review.map((review) => {
           return (
-            <div key={review._id}>
+            <div key={review._id} className="reviewItem">
               <div>
-                <h4>{review.title}</h4>
+                <h4>Title: {review.title}</h4>
               </div>
               <div>
-                {review.message} <br /> {review.userId.email} -
-                {review.updated_at}
+                <p>
+                  Message:
+                  {review.message} <br />
+                  {/* {review.userId.email} -
+                  {review.updated_at} */}
+                </p>
               </div>
               <div>{review.description}</div>
             </div>

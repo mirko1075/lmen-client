@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import withCartContext from "../context/withCartContext";
 import CartItem from "../components/CartItem";
 
@@ -8,7 +10,7 @@ const Cart = (props) => {
   const cartKeys = Object.keys(cart || {});
   console.log("cartKeys :>> ", cartKeys, cart);
   return (
-    <>
+    <div className="cartDiv">
       <div className="">
         <div className="">
           <h4 className="title">My Cart</h4>
@@ -17,7 +19,7 @@ const Cart = (props) => {
       <br />
       <div className="container">
         {cartKeys.length ? (
-          <div className="">
+          <div className="cartItemDiv">
             {cartKeys.map((key) => (
               <CartItem
                 cartKey={key}
@@ -39,17 +41,15 @@ const Cart = (props) => {
             </div>
           </div>
         ) : (
-          <div className="column">
+          <div className="noItemsCart">
             <div className="">No item in cart!</div>
+            <div className="">
+              <Link to="/ProductList">Go to products</Link>
+            </div>
           </div>
         )}
       </div>
-      <br />
-      <br />
-      <br /> <br />
-      <br />
-      <br />
-    </>
+    </div>
   );
 };
 

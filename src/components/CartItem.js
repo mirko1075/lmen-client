@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CartItem = (props) => {
   const { cartItem, cartKey } = props;
@@ -8,32 +9,27 @@ const CartItem = (props) => {
   const imgHeight = "150";
   const { product, amount } = cartItem;
   return (
-    <div className=" column is-half">
-      <div className="box">
-        <div className="media">
-          <div className="media-left">
-            <figure className="image is-64x64">
-              <img
-                src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_${imgWidth},h_${imgHeight},c_scale/${product.image}_1.jpg`}
-                alt={product.shortDesc}
-              />
-            </figure>
-          </div>
-          <div className="media-content">
-            <b style={{ textTransform: "capitalize" }}>
-              {product.name}{" "}
-              <span className="tag is-primary">${product.price}</span>
-            </b>
-            <div>{product.shortDesc}</div>
-            <small>{`${amount} in cart`}</small>
-          </div>
-          <div
-            className="media-right"
-            onClick={() => props.removeFromCart(cartKey)}
-          >
-            <span className="delete is-large"></span>
-          </div>
-        </div>
+    <div className="cartItem">
+      <div className="">
+        <figure className="image is-64x64">
+          <img
+            src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_${imgWidth},h_${imgHeight},c_scale/${product.image}_1.jpg`}
+            alt={product.shortDesc}
+          />
+        </figure>
+      </div>
+      <div className="">
+        <b>
+          {product.name} <span className="">€{product.price}</span>
+        </b>
+        <div>{product.shortDesc}</div>
+        <small>Amount: {amount}</small>
+      </div>
+      <div
+        className="media-right"
+        onClick={() => props.removeFromCart(cartKey)}
+      >
+        <span className="delete is-large"></span>
       </div>
     </div>
   );
