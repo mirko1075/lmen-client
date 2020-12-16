@@ -143,7 +143,7 @@ export default class Contact extends Component {
                       data-val="true"
                       id="acceptTerms"
                       name="AcceptPrivacy"
-                      onchange="validatePrivacy();"
+                      onChange="validatePrivacy();"
                       type="checkbox"
                       value="true"
                     />

@@ -2,22 +2,21 @@ import React from "react";
 
 function ReviewCard(props) {
   const review = props.review;
-
-  // console.log("showAddReview :>> ", showAddReview);
-  // console.log("props.show :>> ", props.show);
-  // console.log("updateReviews from ReviewCard :>> ", props);
+  console.log("updateReviews from ReviewCard :>> ", props);
   return (
     <div>
       {review.length ? (
         review.map((review) => {
           return (
             <div key={review._id}>
-              <h3>
-                {review.title} <br />
+              <div>
+                <h4>{review.title}</h4>
+              </div>
+              <div>
                 {review.message} <br /> {review.userId.email} -
                 {review.updated_at}
-              </h3>
-              <p>{review.description}</p>
+              </div>
+              <div>{review.description}</div>
             </div>
           );
         })

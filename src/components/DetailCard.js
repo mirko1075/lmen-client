@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withCartContext from "../context/withCartContext";
-import ReviewCard from "../components/ReviewCard";
 
 class DetailCard extends Component {
   state = {
@@ -32,29 +31,12 @@ class DetailCard extends Component {
     const imgHeight = "150";
     const addToCart = this.props.context.addToCart;
     // console.log("addToCart :>> ", addToCart);
-    // console.log("product :>> ", product);
+    console.log("this.state from product Detail   :>> ", this.state);
     // console.log("this.props from product Detail :>> ", this.props.context);
 
     return (
       <div className="detailCard">
         <div>
-          <div className="detailData">
-            <p>{product && product.name}</p>
-            <br />
-            <p>{product && product.description}</p>
-            {this.props.isFavorite ? (
-              <button
-                onClick={() => this.props.removeFromFavourites(product._id)}
-              >
-                ❤️
-              </button>
-            ) : (
-              <button onClick={() => this.props.addToFavourites(product._id)}>
-                🤍
-              </button>
-            )}
-          </div>
-
           <div className="detailMainImg">
             <img
               src={`https://res.cloudinary.com/dps0lnavi/image/upload/w_${imgWidth},h_${imgHeight},c_scale/${product.image}_1.jpg`}
@@ -91,37 +73,6 @@ class DetailCard extends Component {
                 className="detailImage"
               />
             </div>
-          </div>
-          <div>
-            <ReviewCard product={product} review={review} />
-          </div>
-        </div>
-
-        <div>
-          {/* SHOPPING */}
-          <b style={{ textTransform: "capitalize" }}>{product.name} </b>
-          <div>{product.description}</div>
-          {product.stock > 0 ? (
-            <small>{product.stock + " Available"}</small>
-          ) : (
-            <small className="">Out Of Stock</small>
-          )}
-
-          <div className="">
-            <span className="">€ {product.price} </span>
-            <button
-              className=""
-              onClick={() =>
-                addToCart({
-                  id: product._id,
-                  product,
-                  amount: 1,
-                })
-              }
-            >
-              Add to Cart
-            </button>
-            <Link to="/private/cart">See cart</Link>
           </div>
         </div>
       </div>
