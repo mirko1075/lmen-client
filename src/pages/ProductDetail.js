@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import apiService from "./../lib/api-service";
 import authService from "./../lib/auth-service";
+import withCartContext from "../context/withCartContext";
+
+import ReviewCard from "../components/ReviewCard";
 import DetailCard from "../components/DetailCard";
 import { withAuth } from "./../context/auth-context";
 
@@ -34,7 +39,9 @@ class ProductDetail extends Component {
       .getOne(id)
       .then((product) => {
         // console.log("product.review :>> ", product.review);
-        const review = product.review;
+        let review = product.review;
+        if (review) review = [];
+        console.log("######review :>> ", review);
         let favourites = product.favourites;
         let isFavorite = false;
         if (!favourites) favourites = [];
@@ -57,8 +64,8 @@ class ProductDetail extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const updateReviews = this.state.review;
-    // console.log("updateReviews from AddReview:>> ", updateReviews);
-    // console.log("this.state from AddReview :>> ", this.state);
+    console.log("updateReviews from AddReview:>> ", updateReviews);
+    console.log("this.state from AddReview :>> ", this.state);
     const pr = apiService
       .postReview(
         this.state.product._id,
@@ -67,7 +74,7 @@ class ProductDetail extends Component {
         this.state.rate
       )
       .then((review) => {
-        // console.log("Review created :>> ", review);
+        console.log("Review created :>> ", review);
         updateReviews.push(review);
         this.setState({ review: updateReviews });
         return pr;
@@ -103,79 +110,135 @@ class ProductDetail extends Component {
 
   render() {
     let isFavorite = this.state.isFavorite;
+    const addToCart = this.props.context.addToCart;
+    console.log("this.state from ProductDetail :>> ", this.state);
     return (
       <div className="productDetail">
-        <DetailCard
-          isFavorite={isFavorite}
-          addToFavourites={this.addToFavourites}
-          removeFromFavourites={this.removeFromFavourites}
-          product={this.state.product}
-          review={this.state.review}
-        />
-        <div className="reviewBlock">
+        <div className="productDetailLeft">
           <div>
-            <button onClick={this.showAddReview}>
-              {this.state.showAddReview ? "Hide form" : "Add Review"}
-            </button>
+            <DetailCard
+              isFavorite={isFavorite}
+              addToFavourites={this.addToFavourites}
+              removeFromFavourites={this.removeFromFavourites}
+              product={this.state.product}
+              review={this.state.review}
+            />
+            <ReviewCard
+              product={this.state.product}
+              review={this.state.review}
+            />
           </div>
-          {this.state.showAddReview ? (
+          <div className="reviewBlock">
             <div>
-              <form onSubmit={this.handleSubmit}>
-                <div>
-                  <label htmlFor="title">Title</label>
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message">Message</label>
-                </div>
-                <div>
-                  <input
-                    type="textarea"
-                    cols="10"
-                    lines="10"
-                    name="message"
-                    id="message"
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="rate">rate</label>
-                </div>
-                <div>
-                  <input
-                    type="number"
-                    name="rate"
-                    min="1"
-                    max="5"
-                    id="rate"
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div>
-                  <input type="submit" value="Add it" />
-                </div>
-              </form>
+              <button onClick={this.showAddReview}>
+                {this.state.showAddReview ? "Hide form" : "Add Review"}
+              </button>
             </div>
-          ) : null}
+            {this.state.showAddReview ? (
+              <div>
+                <form onSubmit={this.handleSubmit}>
+                  <div>
+                    <label htmlFor="title">Title</label>
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message">Message</label>
+                  </div>
+                  <div>
+                    <input
+                      type="textarea"
+                      cols="10"
+                      lines="10"
+                      name="message"
+                      id="message"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="rate">rate</label>
+                  </div>
+                  <div>
+                    <input
+                      type="number"
+                      name="rate"
+                      min="1"
+                      max="5"
+                      id="rate"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div>
+                    <input type="submit" value="Add it" />
+                  </div>
+                </form>
+              </div>
+            ) : null}
+          </div>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        <div className="productDetailRight">
+          <div>
+            {/* SHOPPING */}
+            <div>
+              <b style={{ textTransform: "capitalize" }}>
+                {this.state.product.name}
+                {" - COD: "}
+                {this.state.product.image}
+              </b>
+            </div>
+            <div>
+              <b>Description: </b>
+              {this.state.product.description}
+            </div>
+            <div>
+              <b>Materials: </b>
+              {this.state.product.material}
+            </div>
+            <div>
+              <b>Technic: </b>
+              {this.state.product.technic ? this.state.product.technic : "N/A"}
+            </div>
+            <div>
+              <b>Dimensions: </b>
+              {this.state.product.dimensions}
+            </div>
+            <div>
+              <b>Rating: </b>
+              {this.state.product.rating}
+            </div>
+            {this.state.product.stock > 0 ? (
+              <small>{this.state.product.stock + " Available"}</small>
+            ) : (
+              <small className="">Out Of Stock</small>
+            )}
+
+            <div className="">
+              <span className="">€ {this.state.product.price} </span>
+              <button
+                className=""
+                onClick={() =>
+                  addToCart({
+                    id: this.sproduct._id,
+                    product: this.product,
+                    amount: 1,
+                  })
+                }
+              >
+                Add to Cart
+              </button>
+              <Link to="/private/cart">See cart</Link>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default withAuth(ProductDetail);
+export default withCartContext(withAuth(ProductDetail));

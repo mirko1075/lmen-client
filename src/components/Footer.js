@@ -6,18 +6,18 @@ export default function Footer() {
     <div className="footer">
       <div className="FooterDivs">
         <Link>Privacy policy</Link> | <Link>Cookies policy</Link> |{" "}
-        <Link>Contact</Link>
+        <Link to="/Contact">Contact</Link>
       </div>
       <div className="FooterDivs">
         © 2020 LM&N Confeccion - Brasil - All rigths reserved
       </div>
       <div className="FooterDivs">
         <h4>Follow us on</h4>
-        <div class="a2a_kit a2a_kit_size_32 a2a_default_style a2a_follow">
+        <div className="">
           {/* <!-- ShareThis BEGIN --> */}
-          <Link class="a2a_button_facebook" data-a2a-follow="AddToAny">
-            JJJJ
-          </Link>
+          <a href="https://www.instagram.com/lm_e_n.confeccion/">
+            Follow on IG
+          </a>
           {/* <!-- ShareThis END --> */}
         </div>
       </div>
