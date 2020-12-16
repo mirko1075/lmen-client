@@ -30,7 +30,7 @@ export default class Contact extends Component {
         </div>
         <div className="contactContainer">
           <div className="contactInfo">
-            <b>INSTA:</b>
+            <b>IG:</b>
             <a
               target="_blank"
               href="https://www.instagram.com/lm_e_n.confeccion/"
@@ -45,16 +45,16 @@ export default class Contact extends Component {
             </a>
             <br />
             <br />
-            <b>Mail:</b>{" "}
+            <b>MAIL:</b>{" "}
             <a target="_blank" href="mailto:lmen.confeccion@bol.com.br">
               lmen.confeccion@bol.com.br
             </a>
             <br />
             <br />
-            <b>DIRECCIÓN:</b> Rua 15 de novembro, 862 centro Bonito MS Brasil
+            <b>ADDRESS:</b> Rua 15 de novembro, 862 centro Bonito MS Brasil
             cep:79290-000 <br />
             <br />
-            <b>TEL:</b> +5567993086314 +5567993350642
+            <b>PHONE:</b> +5567993086314 +5567993350642
           </div>
           {/* CONTACT FORM */}
           <div className="contactFormDiv">
