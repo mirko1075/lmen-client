@@ -1,0 +1,2 @@
+(this["webpackJsonpget-scripts"]=this["webpackJsonpget-scripts"]||[]).push([[3],{72:function(s,t,i){"use strict";i.r(t),t.default=i.p+"static/media/img2.4021acb7.jpg"}}]);
+//# sourceMappingURL=3.978753e1.chunk.js.map
