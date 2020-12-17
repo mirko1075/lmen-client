@@ -238,22 +238,29 @@ class ProductDetail extends Component {
                   {" - COD: "}
                   {this.state.product.image}
                 </b>
-                {"  -  Save it  "}
-                {this.state.isFavorite ? (
-                  <button
-                    onClick={() =>
-                      this.removeFromFavourites(this.state.product._id)
-                    }
-                  >
-                    ❤️
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => this.addToFavourites(this.state.product._id)}
-                  >
-                    🖤
-                  </button>
-                )}
+
+                {this.props.user ? (
+                  <div>
+                    <p>Save it as favourite</p>
+                    {this.state.isFavorite ? (
+                      <button
+                        onClick={() =>
+                          this.removeFromFavourites(this.state.product._id)
+                        }
+                      >
+                        ❤️
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() =>
+                          this.addToFavourites(this.state.product._id)
+                        }
+                      >
+                        🖤
+                      </button>
+                    )}
+                  </div>
+                ) : null}
               </div>
               <div className="productDetailInfo">
                 <b>Description: </b>
