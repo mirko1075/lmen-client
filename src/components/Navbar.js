@@ -60,13 +60,15 @@ class Navbar extends Component {
           </div>
         </nav>
         <div className="logoDiv">
-          <img
-            src={
-              "https://res.cloudinary.com/dps0lnavi/image/upload/v1607793773/LMeN_LOGO_4_y4ognl.png"
-            }
-            alt=""
-            className="logo"
-          />
+          <Link to="/">
+            <img
+              src={
+                "https://res.cloudinary.com/dps0lnavi/image/upload/v1607793773/LMeN_LOGO_4_y4ognl.png"
+              }
+              alt=""
+              className="logo"
+            />
+          </Link>
         </div>
       </div>
     );

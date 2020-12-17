@@ -77,7 +77,9 @@ class ViewProfile extends Component {
               <h4>State / Province</h4>
               {this.state.user.state}
             </div>
-            <Link to="/private/EditProfile">Edit</Link>
+            <div>
+              <Link to="/private/EditProfile">Edit</Link>
+            </div>
           </div>
         </div>
       </div>
