@@ -50,12 +50,14 @@ class Navbar extends Component {
               <li>
                 <Link to="/Contact">Contact</Link>
               </li>
-              <li className="cart">
-                <Link to="/private/cart">
-                  <ion-icon name="cart"></ion-icon>Cart
-                </Link>
-                <span>{this.props.context.cartElements}</span>
-              </li>
+              {this.props.isLoggedIn ? (
+                <li className="cart">
+                  <Link to="/private/cart">
+                    <ion-icon name="cart"></ion-icon>Cart
+                  </Link>
+                  <span>{this.props.context.cartElements}</span>
+                </li>
+              ) : null}
             </ul>
           </div>
         </nav>
