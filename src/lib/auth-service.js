@@ -155,7 +155,31 @@ class AuthService {
     return pr;
   }
   postFavorite(productId, favourite) {
-    console.log("Updating favourite list :>> ", favourite);
+    console.log(
+      "Updating favourite list -productId - Auth service :>> ",
+      productId
+    );
+    console.log(
+      "Updating favourite list -favourite- Auth service :>> ",
+      favourite
+    );
+    console.dir(favourite);
+    const pr = this.auth
+      .post("/auth/favourites", { productId, favourite })
+      .then((response) => response.data);
+    return pr;
+  }
+
+  removeFavorite(productId, favourite) {
+    console.log(
+      "Updating favourite list -productId - Auth service :>> ",
+      productId
+    );
+    console.log(
+      "Updating favourite list -favourite- Auth service :>> ",
+      favourite
+    );
+    console.dir(favourite);
     const pr = this.auth
       .post("/auth/favourites", { productId, favourite })
       .then((response) => response.data);
