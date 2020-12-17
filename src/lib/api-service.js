@@ -105,6 +105,16 @@ class ApiService {
       });
     return pr;
   }
+
+  deleteReview(reviewId, productId) {
+    const pr = this.api
+      .delete("/product/" + productId + "/review/" + reviewId)
+      .then((response) => response.data)
+      .catch((err) => {
+        console.log(err);
+      });
+    return pr;
+  }
 }
 
 const apiService = new ApiService();

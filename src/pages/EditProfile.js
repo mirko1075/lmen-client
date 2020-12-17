@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import withCartContext from "../context/withCartContext";
 import { withAuth } from "./../context/auth-context";
 import authService from "./../lib/auth-service";
@@ -8,8 +10,22 @@ import img from "../images/Carousel/img3.jpg";
 class EditProfile extends Component {
   state = {
     user: {},
-    countries: {},
-    cities: [{}],
+    firstName: "",
+    lastName: "",
+    address: "",
+    country: "",
+    CP: "",
+    city: "",
+    state: "",
+    phoneNumber: "",
+    gender: "",
+    birthDateDay: "",
+    birthDateMonth: "",
+    birthDateYear: "",
+    email: "",
+    currentPassword: "",
+    password: "",
+    repeatpassword: "",
   };
 
   componentDidMount() {
@@ -142,10 +158,27 @@ class EditProfile extends Component {
   };
 
   render() {
+    const daysArr = [];
+    const monthsArr = [];
+    const yearsArr = [];
+    for (let i = 1; i <= 31; i++) {
+      daysArr.push("" + i);
+    }
+    for (let i = 1; i <= 12; i++) {
+      monthsArr.push("" + i);
+    }
+    const date = new Date();
+    const year = Number(date.getFullYear());
+
+    for (let i = 1920; i <= year; i++) {
+      yearsArr.push("" + i);
+    }
     console.log("this.props :>> ", this.props);
     return (
       <div className="editProfileContainer">
-        <div>Edit profile</div>
+        <div>
+          <Link to="/private/ViewProfile">Back to profile</Link>
+        </div>
         <div>
           <div className="editProfileDiv">
             <div>
@@ -247,26 +280,72 @@ class EditProfile extends Component {
                     <label htmlFor="birthDateDay">Birth date</label>
                   </div>
                   <div>
-                    <input
-                      type="text"
+                    <select
                       name="birthDateDay"
-                      value={this.state.birthDateDay}
+                      id="birthDateDay"
                       onChange={this.handleChange}
-                    />
-                    /
-                    <input
-                      type="text"
+                    >
+                      <option value="" key="d-0"></option>
+                      {daysArr.map((day) => {
+                        if (this.state.birthDateDay == day) {
+                          return (
+                            <option value={day} key={"m-" + day} selected>
+                              {day}
+                            </option>
+                          );
+                        } else {
+                          return (
+                            <option value={day} key={"m-" + day}>
+                              {day}
+                            </option>
+                          );
+                        }
+                      })}
+                    </select>
+                    <select
                       name="birthDateMonth"
-                      value={this.state.birthDateMonth}
+                      id="birthDateMonth"
                       onChange={this.handleChange}
-                    />
-                    /
-                    <input
-                      type="text"
+                    >
+                      <option value="" key="m-0"></option>
+                      {monthsArr.map((month) => {
+                        if (this.state.birthDateMonth == month) {
+                          return (
+                            <option value={month} key={"m-" + month} selected>
+                              {month}
+                            </option>
+                          );
+                        } else {
+                          return (
+                            <option value={month} key={"m-" + month}>
+                              {month}
+                            </option>
+                          );
+                        }
+                      })}
+                    </select>
+                    <select
                       name="birthDateYear"
-                      value={this.state.birthDateYear}
+                      id="birthDateYear"
                       onChange={this.handleChange}
-                    />
+                    >
+                      <option value="" key="y-0"></option>
+                      {yearsArr.map((year) => {
+                        if (this.state.birthDateYear == year) {
+                          return (
+                            <option value={year} key={"m-" + year} selected>
+                              {year}
+                            </option>
+                          );
+                        } else {
+                          return (
+                            <option value={year} key={"m-" + year}>
+                              {year}
+                            </option>
+                          );
+                        }
+                      })}
+                    </select>
                   </div>
                   <div>
                     <label htmlFor="gender">Gender</label>

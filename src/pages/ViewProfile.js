@@ -23,58 +23,63 @@ class ViewProfile extends Component {
   }
   render() {
     return (
-      <div className="showProfile">
-        <h3>User profile</h3>
-        <br />
-        <div className="profileItems">
-          <h4>Name</h4>
-          {this.state.user.firstName}
+      <div>
+        <div></div>
+        <div>
+          <div className="showProfile">
+            <h3>User profile</h3>
+            <br />
+            <div className="profileItems">
+              <h4>Name</h4>
+              {this.state.user.firstName}
+            </div>
+            <div className="profileItems">
+              <h4>Last name</h4>
+              {this.state.user.lasttName}
+            </div>
+            <div className="profileItems">
+              <h4>Email</h4>
+              {this.state.user.email}
+            </div>
+            <div className="profileItems">
+              <h4>Phone number</h4>
+              {this.state.user.phoneNumber}
+            </div>
+            <div className="profileItems">
+              <h4>Gender</h4>
+              {this.state.user.gender}
+            </div>
+            <div className="profileItems">
+              <h4>Birth day</h4>
+              {this.state.user.birthDateDay +
+                "/" +
+                this.state.user.birthDateMonth +
+                "/" +
+                this.state.user.birthDateYear}
+            </div>
+            <div className="profileItems">
+              <h4>Address</h4>
+              {this.state.user.address}
+            </div>
+            <div className="profileItems">
+              <h4>Country</h4>
+              {this.state.user.country}
+            </div>
+            <div className="profileItems">
+              <h4>Zip code</h4>
+              {this.state.user.CP}
+            </div>
+            <div className="profileItems">
+              <h4>City</h4>
+              {this.state.user.city}
+            </div>
+            <div className="profileItems">
+              <h4>State / Province</h4>
+              {this.state.user.state}
+            </div>
+            <Link to="/private/EditProfile">Edit</Link>
+          </div>
         </div>
-        <div className="profileItems">
-          <h4>Last name</h4>
-          {this.state.user.lasttName}
-        </div>
-        <div className="profileItems">
-          <h4>Email</h4>
-          {this.state.user.email}
-        </div>
-        <div className="profileItems">
-          <h4>Phone number</h4>
-          {this.state.user.phoneNumber}
-        </div>
-        <div className="profileItems">
-          <h4>Gender</h4>
-          {this.state.user.gender}
-        </div>
-        <div className="profileItems">
-          <h4>Birth day</h4>
-          {this.state.user.birthDateDay +
-            "/" +
-            this.state.user.birthDateMonth +
-            "/" +
-            this.state.user.birthDateYear}
-        </div>
-        <div className="profileItems">
-          <h4>Address</h4>
-          {this.state.user.address}
-        </div>
-        <div className="profileItems">
-          <h4>Country</h4>
-          {this.state.user.country}
-        </div>
-        <div className="profileItems">
-          <h4>Zip code</h4>
-          {this.state.user.CP}
-        </div>
-        <div className="profileItems">
-          <h4>City</h4>
-          {this.state.user.city}
-        </div>
-        <div className="profileItems">
-          <h4>State / Province</h4>
-          {this.state.user.state}
-        </div>
-        <Link to="/private/EditProfile">Edit</Link>
       </div>
     );
   }

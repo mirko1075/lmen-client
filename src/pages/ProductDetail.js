@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import apiService from "./../lib/api-service";
 import authService from "./../lib/auth-service";
 import withCartContext from "../context/withCartContext";
-import MenuCategories from "./../components/MenuCategories";
 import ReviewCard from "../components/ReviewCard";
 import DetailCard from "../components/DetailCard";
 import { withAuth } from "./../context/auth-context";
@@ -19,6 +18,7 @@ class ProductDetail extends Component {
     rate: "",
     favourites: [],
     isFavorite: false,
+    userId: "",
   };
 
   componentDidMount() {
@@ -48,7 +48,8 @@ class ProductDetail extends Component {
         favourites.length && favourites.includes(id)
           ? (isFavorite = true)
           : (isFavorite = false);
-        this.setState({ product, review, favourites, isFavorite });
+        let userId = this.props.user._id;
+        this.setState({ product, review, favourites, isFavorite, userId });
 
         // console.log("ProductDetail state :>> ", this.state);
       })
@@ -107,11 +108,30 @@ class ProductDetail extends Component {
     isFavorite = false;
     this.setState({ favourites, isFavorite }, () => callback && callback());
   };
-
+  deleteReview(id) {
+    console.log("this.state :>> ", this);
+    let reviewsArr = this.review;
+    let userId = this.userId;
+    let productId = this.product._id;
+    console.log("userId, productId :>> ", userId, productId);
+    const reviewsArrMod = reviewsArr.filter((review) => {
+      return review._id != id;
+    });
+    const pr = apiService
+      .deleteReview(id, productId)
+      .then((review) => {
+        console.log("Review deleted :>> ", review);
+        console.log("Review arr updated :>> ", reviewsArrMod);
+        this.setState({ review: reviewsArrMod });
+        return pr;
+      })
+      .catch((err) => {});
+  }
   render() {
     let isFavorite = this.state.isFavorite;
     const addToCart = this.props.context.addToCart;
-    console.log("this.state from ProductDetail :>> ", this.state);
+    const userId = this.props.user._id;
+    console.log("this.props from ProductDetail :>> ", this.props);
     return (
       <>
         <div className="productDetail">
@@ -127,6 +147,8 @@ class ProductDetail extends Component {
               <ReviewCard
                 product={this.state.product}
                 review={this.state.review}
+                deleteReview={this.deleteReview}
+                userId={userId}
               />
             </div>
             <div>
@@ -154,21 +176,24 @@ class ProductDetail extends Component {
                       <label htmlFor="message">Message</label>
                     </div>
                     <div className="reviewBlockItems">
-                      <input
-                        type="textarea"
-                        cols="10"
-                        lines="10"
-                        name="message"
+                      <textarea
+                        className=""
+                        cols="20"
                         id="message"
+                        name="message"
+                        rows="4"
                         onChange={this.handleChange}
+                        value={this.state.message}
                       />
                     </div>
+                    <br />
+                    <br />
                     <div className="reviewBlockItems">
                       <label htmlFor="rate">rate</label>
                     </div>
                     <div className="reviewBlockItems">
                       <input
-                        className="reviewInput"
+                        className="reviewInput rateInput"
                         type="number"
                         name="rate"
                         min="1"

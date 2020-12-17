@@ -23,36 +23,35 @@ class Login extends Component {
     loginErr: "",
     signupErr: "",
   };
-  componentDidMount() {
-    const countriesCities = [];
-    const pr = countryService
-      .getCountries()
-      .then((countriesFound) => {
-        let countries = Object.keys(countriesFound.countries);
-        console.log("countries :>> ", countries);
-        for (let i = 0; i < countries.length; i++) {
-          let country = countries[i];
-          console.log("country :>> ", country);
-          const pr = countryService
-            .getCities(country)
-            .then((cities) => {
-              let countriesCitiesObj = { country, cities };
-              countriesCities.push(countriesCitiesObj);
-            })
-            .catch((err) => {
-              console.log("Error loading cities :>> ", err);
-            });
-          return pr;
-        }
-        this.setState({ countriesCities });
-        console.log(
-          "this.state.countriesCities :>> ",
-          this.state.countriesCities
-        );
-      })
-      .catch((err) => {});
-    return pr;
-  }
+  // componentDidMount() {
+  //   const countriesCities = [];
+  //   const pr = countryService
+  //     .getCountries()
+  //     .then((countriesFound) => {
+  //       // let countries = Object.keys(countriesFound);
+  //       console.log("countries :>> ", countriesFound);
+  //       //   countries.forEach((country) => {
+  //       //     console.log("country :>> ", country);
+  //       //     const pr = countryService
+  //       //       .getCities(country)
+  //       //       .then((cities) => {
+  //       //         let countriesCitiesObj = { country, cities };
+  //       //         countriesCities.push(countriesCitiesObj);
+  //       //       })
+  //       //       .catch((err) => {
+  //       //         console.log("Error loading cities :>> ", err);
+  //       //       });
+  //       //     return pr;
+  //       //   });
+  //       //   this.setState({ countriesCities });
+  //       //   console.log(
+  //       //     "this.state.countriesCities :>> ",
+  //       //     this.state.countriesCities
+  //       //   );
+  //     })
+  //     .catch((err) => {});
+  //   return pr;
+  // }
   handleLoginFormSubmit = (event) => {
     event.preventDefault();
     const { email, password } = this.state;
@@ -133,6 +132,21 @@ class Login extends Component {
       repeatpassword,
     } = this.state;
     // console.log("this.props from Login :>> ", this.props);
+    const daysArr = [];
+    const monthsArr = [];
+    const yearsArr = [];
+    for (let i = 1; i <= 31; i++) {
+      daysArr.push("" + i);
+    }
+    for (let i = 1; i <= 12; i++) {
+      monthsArr.push("" + i);
+    }
+    const date = new Date();
+    const year = Number(date.getFullYear());
+
+    for (let i = 1920; i <= year; i++) {
+      yearsArr.push("" + i);
+    }
     return (
       <div className="loginDiv">
         <div className="authForm">
@@ -308,26 +322,48 @@ class Login extends Component {
               <label htmlFor="birthDateDay">Birth date</label>
             </div>
             <div>
-              <input
-                type="text"
+              <select
                 name="birthDateDay"
-                value={birthDateDay}
+                id="birthDateDay"
                 onChange={this.handleChange}
-              />
-              /
-              <input
-                type="text"
+              >
+                <option value="" key="d-0"></option>
+                {daysArr.map((day) => {
+                  return (
+                    <option value={day} key={"d-" + day}>
+                      {day}
+                    </option>
+                  );
+                })}
+              </select>
+              <select
                 name="birthDateMonth"
-                value={birthDateMonth}
+                id="birthDateMonth"
                 onChange={this.handleChange}
-              />
-              /
-              <input
-                type="text"
+              >
+                <option value="" key="m-0"></option>
+                {monthsArr.map((month) => {
+                  return (
+                    <option value={month} key={"m-" + month}>
+                      {month}
+                    </option>
+                  );
+                })}
+              </select>
+              <select
                 name="birthDateYear"
-                value={birthDateYear}
+                id="birthDateYear"
                 onChange={this.handleChange}
-              />
+              >
+                <option value="" key="y-0"></option>
+                {yearsArr.map((year) => {
+                  return (
+                    <option value={year} key={"y-" + year}>
+                      {year}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div>
               <label htmlFor="gender">Gender</label>

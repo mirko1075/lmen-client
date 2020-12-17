@@ -24,9 +24,19 @@ a:hover {
   color: var(--green-color);
 }
 
+label {
+  color: var(--text-color);
+  font-size: 12px;
+  display: inline;
+  text-transform: uppercase;
+}
+
 h1 {
-  font-size: 70px;
-  margin-bottom: 20px;
+  color: var(--text-color);
+  font-size: 16px;
+  display: inline;
+  text-transform: uppercase;
+  letter-spacing: 6px;
 }
 
 h2 {
@@ -581,7 +591,8 @@ nav li {
   height: 30px;
 }
 
-.reviewInput {
+.rateInput {
+  width: 30px;
 }
 .select-css {
   display: block;
@@ -629,6 +640,10 @@ input[type="text"] {
   border: 2px solid #ccc;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+}
+
+input[type="number"] {
+  width: 50px;
 }
 
 input[type="text"]:focus {

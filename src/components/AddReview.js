@@ -36,6 +36,20 @@ class AddReview extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div>
+            <label htmlFor="rate">rate</label>
+          </div>
+          <div>
+            <input
+              type="number"
+              name="rate"
+              min="1"
+              max="5"
+              id="rate"
+              onChange={this.handleChange}
+              value={this.state.rate}
+            />
+          </div>
+          <div>
             <label htmlFor="title">Title</label>
           </div>
           <div>
@@ -68,20 +82,7 @@ class AddReview extends Component {
           <br />
           <br />
           <br />
-          <div>
-            <label htmlFor="rate">rate</label>
-          </div>
-          <div>
-            <input
-              type="number"
-              name="rate"
-              min="1"
-              max="5"
-              id="rate"
-              onChange={this.handleChange}
-              value={this.state.rate}
-            />
-          </div>
+
           <div>
             <input type="submit" value="Add it" />
           </div>

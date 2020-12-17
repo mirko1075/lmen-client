@@ -37,7 +37,7 @@ class ListCard extends Component {
     this.setState({ favourites, isFavorite }, () => callback && callback());
   };
   render() {
-    // console.log("props from ListCard :>> ", this.props);
+    console.log("props from ListCard :>> ", this.props);
     const product = this.props.product;
     const imgWidth = "200";
     const imgHeight = "200";

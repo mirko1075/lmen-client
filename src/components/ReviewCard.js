@@ -22,6 +22,13 @@ function ReviewCard(props) {
                 </p>
               </div>
               <div>{review.description}</div>
+              {review.userId == props.userId ? (
+                <div>
+                  <button onClick={() => props.deleteReview(review._id)}>
+                    Delete
+                  </button>
+                </div>
+              ) : null}
             </div>
           );
         })
