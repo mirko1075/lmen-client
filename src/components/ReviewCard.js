@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import closingWindowImg from "../images/closewindow.png";
+
 function ReviewCard(props) {
   const review = props.review;
-  console.log("updateReviews from ReviewCard :>> ", props);
   return (
     <div className="review">
       <h4>{review.length} Reviews</h4>
@@ -16,12 +18,16 @@ function ReviewCard(props) {
                     <h4>Title: {review.title}</h4>
                     {review.userId == props.userId ? (
                       <div>
-                        <img
-                          src={closingWindowImg}
+                        <Link
+                          to="#"
                           onClick={() => props.deleteReview(review._id)}
-                          alt=""
-                          className="closingIcon"
-                        />
+                        >
+                          <img
+                            src={closingWindowImg}
+                            alt=""
+                            className="closingIcon"
+                          />
+                        </Link>
                       </div>
                     ) : null}
                   </div>

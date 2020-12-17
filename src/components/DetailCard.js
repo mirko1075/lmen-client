@@ -24,15 +24,12 @@ class DetailCard extends Component {
     }
   }
   addToFavourites = (productId, callback) => {
-    // console.log("this.state from Product Detail addToFav :>> ", this.state);
     let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    // console.log("favourites :>> ", favourites);
 
     const pr = authService
       .postFavorite(productId, favourites)
       .then((user) => {
-        // console.log("Added to favourite created updated user:>> ", user);
         favourites.push(productId);
         isFavorite = true;
         this.setState({ favourites, isFavorite }, () => callback && callback());
@@ -41,23 +38,17 @@ class DetailCard extends Component {
       .catch((err) => {});
   };
   removeFromFavourites = (productId, callback) => {
-    // console.log("this.state from Product Detail addToFav :>> ", this.state);
     let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    // console.log("favourites :>> ", favourites);
     favourites.splice(favourites.indexOf(productId), 1);
     isFavorite = false;
     this.setState({ favourites, isFavorite }, () => callback && callback());
   };
   render() {
     const { product, review } = this.state;
-    // console.log("props from DetailCard :>> ", this.props);
     const imgWidth = "100";
     const imgHeight = "100";
     const addToCart = this.props.context.addToCart;
-    // console.log("addToCart :>> ", addToCart);
-    console.log("this.state from product Detail   :>> ", this.state);
-    // console.log("this.props from product Detail :>> ", this.props.context);
 
     return (
       <div className="detailCardCont">

@@ -6,6 +6,7 @@ import authService from "./../lib/auth-service";
 import withCartContext from "../context/withCartContext";
 import ReviewCard from "../components/ReviewCard";
 import DetailCard from "../components/DetailCard";
+import AddReview from "../components/AddReview";
 import { withAuth } from "./../context/auth-context";
 
 class ProductDetail extends Component {
@@ -30,18 +31,18 @@ class ProductDetail extends Component {
       ? this.setState({ showAddReview: false })
       : this.setState({ showAddReview: true });
   };
+
   updateReviews = (id) => {
     // console.log("UpdateReviews running");
     this.getOneProduct(id);
   };
+
   getOneProduct = (id) => {
     apiService
       .getOne(id)
       .then((product) => {
-        console.log("product.review :>> ", product.review);
         let review = product.review;
         if (!review) review = [];
-        console.log("######review :>> ", review);
         let favourites = product.favourites;
         let isFavorite = false;
         if (!favourites) favourites = [];
@@ -51,8 +52,6 @@ class ProductDetail extends Component {
         let userId = "";
         this.props.user ? (userId = this.props.user._id) : (userId = "");
         this.setState({ product, review, favourites, isFavorite, userId });
-
-        // console.log("ProductDetail state :>> ", this.state);
       })
       .catch((err) => {
         console.log(err);
@@ -60,39 +59,31 @@ class ProductDetail extends Component {
   };
   handleChange = (event) => {
     const { name, value } = event.target;
-    // console.log("name :>> ", name, "value", value);
     this.setState({ [name]: value });
   };
   handleSubmit = (e) => {
     e.preventDefault();
     const updateReviews = this.state.review;
-    console.log("updateReviews from AddReview:>> ", updateReviews);
-    console.log("this.state from AddReview :>> ", this.state);
+    const { product, title, message, rate } = this.state;
     const pr = apiService
-      .postReview(
-        this.state.product._id,
-        this.state.title,
-        this.state.message,
-        this.state.rate
-      )
+      .postReview(product._id, title, message, rate)
       .then((review) => {
         console.log("Review created :>> ", review);
         updateReviews.push(review);
         this.setState({ review: updateReviews });
         return pr;
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log("Error creating review :>> ", err);
+      });
   };
+
   addToFavourites = (productId, callback) => {
-    // console.log("this.state from Product Detail addToFav :>> ", this.state);
     let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    console.log("favourites :>> ", favourites);
-
     const pr = authService
       .postFavorite(productId, favourites)
       .then((user) => {
-        // console.log("Added to favourite created updated user:>> ", user);
         favourites.push(productId);
         isFavorite = true;
         this.setState({ favourites, isFavorite }, () => callback && callback());
@@ -102,15 +93,13 @@ class ProductDetail extends Component {
         console.log("Error posting favourite :>> ", err);
       });
   };
+
   removeFromFavourites = (productId, callback) => {
-    // console.log("this.state from Product Detail addToFav :>> ", this.state);
     let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    // console.log("favourites :>> ", favourites);
     const pr = authService
       .postFavorite(productId, favourites)
       .then((user) => {
-        // console.log("Removed to favourite created updated user:>> ", user);
         favourites.splice(favourites.indexOf(productId), 1);
         isFavorite = false;
         this.setState({ favourites, isFavorite }, () => callback && callback());
@@ -121,31 +110,27 @@ class ProductDetail extends Component {
       });
   };
 
-  deleteReview(id) {
-    console.log("this.state :>> ", this);
-    let reviewsArr = this.review;
-    let userId = this.userId;
-    let productId = this.product._id;
-    console.log("userId, productId :>> ", userId, productId);
+  deleteReview = (id) => {
+    let reviewsArr = this.state.review;
+    let userId = this.state.userId;
+    let productId = this.state.product._id;
     const reviewsArrMod = reviewsArr.filter((review) => {
       return review._id != id;
     });
     const pr = apiService
       .deleteReview(id, productId)
       .then((review) => {
-        console.log("Review deleted :>> ", review);
-        console.log("Review arr updated :>> ", reviewsArrMod);
         this.setState({ review: reviewsArrMod });
         return pr;
       })
       .catch((err) => {});
-  }
+  };
+
   render() {
     let isFavorite = this.state.isFavorite;
     const addToCart = this.props.context.addToCart;
     let userId = "";
     if (this.props.user) userId = this.props.user._id;
-    console.log("this.props from ProductDetail :>> ", this.props);
     return (
       <>
         <div className="productDetail">
@@ -173,55 +158,10 @@ class ProductDetail extends Component {
                   </button>
                 </div>
                 {this.state.showAddReview ? (
-                  <div>
-                    <form onSubmit={this.handleSubmit}>
-                      <div className="reviewBlockItems">
-                        <label htmlFor="title">Title</label>
-                      </div>
-                      <div className="reviewBlockItems">
-                        <input
-                          className="reviewInput"
-                          type="text"
-                          name="title"
-                          id="title"
-                          onChange={this.handleChange}
-                        />
-                      </div>
-                      <div className="reviewBlockItems">
-                        <label htmlFor="message">Message</label>
-                      </div>
-                      <div className="reviewBlockItems">
-                        <textarea
-                          className=""
-                          cols="20"
-                          id="message"
-                          name="message"
-                          rows="4"
-                          onChange={this.handleChange}
-                          value={this.state.message}
-                        />
-                      </div>
-                      <br />
-                      <br />
-                      <div className="reviewBlockItems">
-                        <label htmlFor="rate">rate</label>
-                      </div>
-                      <div className="reviewBlockItems">
-                        <input
-                          className="reviewInput rateInput"
-                          type="number"
-                          name="rate"
-                          min="1"
-                          max="5"
-                          id="rate"
-                          onChange={this.handleChange}
-                        />
-                      </div>
-                      <div className="reviewBlockItems">
-                        <input type="submit" value="Add it" />
-                      </div>
-                    </form>
-                  </div>
+                  <AddReview
+                    product={this.state.product}
+                    updateReviews={this.updateReviews}
+                  />
                 ) : null}
               </div>
             ) : null}

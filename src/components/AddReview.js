@@ -19,15 +19,18 @@ class AddReview extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    const updateReviews = this.props.updateReviews;
-    // console.log("updateReviews from AddReview:>> ", updateReviews);
-    // console.log("this.state from AddReview :>> ", this.state);
-    const pr = apiService.postReview(
-      this.state.product._id,
-      this.state.title,
-      this.state.message,
-      this.state.rate
-    );
+    const updateReviews = this.state.review;
+    const { product, title, message, rate } = this.state;
+
+    const pr = apiService
+      .postReview(product._id, title, message, rate)
+      .then((review) => {
+        console.log("Review created :>> ", review);
+        updateReviews.push(review);
+        this.setState({ review: updateReviews });
+        return pr;
+      })
+      .catch((err) => {});
     this.props.updateReviews(this.state.product._id);
   };
 
@@ -35,36 +38,22 @@ class AddReview extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="rate">rate</label>
-          </div>
-          <div>
-            <input
-              type="number"
-              name="rate"
-              min="1"
-              max="5"
-              id="rate"
-              onChange={this.handleChange}
-              value={this.state.rate}
-            />
-          </div>
-          <div>
+          <div className="reviewBlockItems">
             <label htmlFor="title">Title</label>
           </div>
-          <div>
+          <div className="reviewBlockItems">
             <input
+              className="reviewInput"
               type="text"
               name="title"
               id="title"
               onChange={this.handleChange}
-              value={this.state.title}
             />
           </div>
-          <div>
+          <div className="reviewBlockItems">
             <label htmlFor="message">Message</label>
           </div>
-          <div>
+          <div className="reviewBlockItems">
             <textarea
               className=""
               cols="20"
@@ -72,18 +61,26 @@ class AddReview extends Component {
               name="message"
               rows="4"
               onChange={this.handleChange}
-            >
-              {this.state.message}
-            </textarea>
+              value={this.state.message}
+            />
           </div>
           <br />
           <br />
-          <br />
-          <br />
-          <br />
-          <br />
-
-          <div>
+          <div className="reviewBlockItems">
+            <label htmlFor="rate">rate</label>
+          </div>
+          <div className="reviewBlockItems">
+            <input
+              className="reviewInput rateInput"
+              type="number"
+              name="rate"
+              min="1"
+              max="5"
+              id="rate"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="reviewBlockItems">
             <input type="submit" value="Add it" />
           </div>
         </form>
