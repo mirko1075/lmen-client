@@ -279,11 +279,12 @@ class EditProfile extends Component {
                   <div>
                     <label htmlFor="birthDateDay">Birth date</label>
                   </div>
-                  <div>
+                  <div className="editProfileDateDivs">
                     <select
                       name="birthDateDay"
                       id="birthDateDay"
                       onChange={this.handleChange}
+                      className="selectDate-css"
                     >
                       <option value="" key="d-0"></option>
                       {daysArr.map((day) => {
@@ -306,6 +307,7 @@ class EditProfile extends Component {
                       name="birthDateMonth"
                       id="birthDateMonth"
                       onChange={this.handleChange}
+                      className="selectDate-css"
                     >
                       <option value="" key="m-0"></option>
                       {monthsArr.map((month) => {
@@ -328,6 +330,7 @@ class EditProfile extends Component {
                       name="birthDateYear"
                       id="birthDateYear"
                       onChange={this.handleChange}
+                      className="selectDate-css"
                     >
                       <option value="" key="y-0"></option>
                       {yearsArr.map((year) => {
@@ -351,7 +354,7 @@ class EditProfile extends Component {
                     <label htmlFor="gender">Gender</label>
                   </div>
                   <div>
-                    Male{" "}
+                    <label>Male </label>
                     {this.state.gender === "male" ? (
                       <input
                         type="radio"
@@ -370,7 +373,7 @@ class EditProfile extends Component {
                         onChange={this.handleChange}
                       />
                     )}{" "}
-                    - Female{" "}
+                    <label> - Female </label>
                     {this.state.gender === "female" ? (
                       <input
                         type="radio"
@@ -389,7 +392,7 @@ class EditProfile extends Component {
                         onChange={this.handleChange}
                       />
                     )}
-                    - Other{" "}
+                    <label>- Other </label>
                     {this.state.gender === "other" ? (
                       <input
                         type="radio"

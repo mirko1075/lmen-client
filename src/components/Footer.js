@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import igIcon from "../images/instagram_icon.png";
+import fbIcon from "../images/facebook_icon.png";
 export default function Footer() {
   return (
     <div className="footer">
@@ -12,11 +13,19 @@ export default function Footer() {
         © 2020 LM&N Confeccion - Brasil - All rigths reserved
       </div>
       <div className="FooterDivs">
-        <h4>Follow us on</h4>
-        <div className="">
+        <div className="social">
           {/* <!-- ShareThis BEGIN --> */}
-          <a href="https://www.instagram.com/lm_e_n.confeccion/">
-            Follow on IG
+          <span className="socialText">Follow us on</span>
+          {"     "}
+          <a
+            href="https://www.instagram.com/lm_e_n.confeccion/"
+            target="_blank"
+          >
+            <img src={igIcon} alt="Add me on IG" className="socialIcon" />
+          </a>
+          {"     "}
+          <a href="https://www.facebook.com/lmen.confeccion" target="_blank">
+            <img src={fbIcon} alt="Add me on FB" className="socialIcon" />
           </a>
           {/* <!-- ShareThis END --> */}
         </div>
