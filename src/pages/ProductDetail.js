@@ -48,7 +48,8 @@ class ProductDetail extends Component {
         favourites.length && favourites.includes(id)
           ? (isFavorite = true)
           : (isFavorite = false);
-        let userId = this.props.user._id;
+        let userId = "";
+        this.props.user ? (userId = this.props.user._id) : (userId = "");
         this.setState({ product, review, favourites, isFavorite, userId });
 
         // console.log("ProductDetail state :>> ", this.state);
@@ -86,7 +87,7 @@ class ProductDetail extends Component {
     // console.log("this.state from Product Detail addToFav :>> ", this.state);
     let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
-    // console.log("favourites :>> ", favourites);
+    console.log("favourites :>> ", favourites);
 
     const pr = authService
       .postFavorite(productId, favourites)
@@ -97,17 +98,29 @@ class ProductDetail extends Component {
         this.setState({ favourites, isFavorite }, () => callback && callback());
         return pr;
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log("Error posting favourite :>> ", err);
+      });
   };
   removeFromFavourites = (productId, callback) => {
     // console.log("this.state from Product Detail addToFav :>> ", this.state);
     let favourites = this.state.favourites;
     let isFavorite = this.state.isFavorite;
     // console.log("favourites :>> ", favourites);
-    favourites.splice(favourites.indexOf(productId), 1);
-    isFavorite = false;
-    this.setState({ favourites, isFavorite }, () => callback && callback());
+    const pr = authService
+      .postFavorite(productId, favourites)
+      .then((user) => {
+        // console.log("Removed to favourite created updated user:>> ", user);
+        favourites.splice(favourites.indexOf(productId), 1);
+        isFavorite = false;
+        this.setState({ favourites, isFavorite }, () => callback && callback());
+        return pr;
+      })
+      .catch((err) => {
+        console.log("Error posting favourite :>> ", err);
+      });
   };
+
   deleteReview(id) {
     console.log("this.state :>> ", this);
     let reviewsArr = this.review;
@@ -130,7 +143,8 @@ class ProductDetail extends Component {
   render() {
     let isFavorite = this.state.isFavorite;
     const addToCart = this.props.context.addToCart;
-    const userId = this.props.user._id;
+    let userId = "";
+    if (this.props.user) userId = this.props.user._id;
     console.log("this.props from ProductDetail :>> ", this.props);
     return (
       <>
@@ -151,64 +165,69 @@ class ProductDetail extends Component {
                 userId={userId}
               />
             </div>
-            <div>
-              <div className="reviewBlockItems">
-                <button onClick={this.showAddReview}>
-                  {this.state.showAddReview ? "Hide form" : "Add Review"}
-                </button>
-              </div>
-              {this.state.showAddReview ? (
-                <div>
-                  <form onSubmit={this.handleSubmit}>
-                    <div className="reviewBlockItems">
-                      <label htmlFor="title">Title</label>
-                    </div>
-                    <div className="reviewBlockItems">
-                      <input
-                        className="reviewInput"
-                        type="text"
-                        name="title"
-                        id="title"
-                        onChange={this.handleChange}
-                      />
-                    </div>
-                    <div className="reviewBlockItems">
-                      <label htmlFor="message">Message</label>
-                    </div>
-                    <div className="reviewBlockItems">
-                      <textarea
-                        className=""
-                        cols="20"
-                        id="message"
-                        name="message"
-                        rows="4"
-                        onChange={this.handleChange}
-                        value={this.state.message}
-                      />
-                    </div>
-                    <br />
-                    <br />
-                    <div className="reviewBlockItems">
-                      <label htmlFor="rate">rate</label>
-                    </div>
-                    <div className="reviewBlockItems">
-                      <input
-                        className="reviewInput rateInput"
-                        type="number"
-                        name="rate"
-                        min="1"
-                        max="5"
-                        id="rate"
-                        onChange={this.handleChange}
-                      />
-                    </div>
-                    <div className="reviewBlockItems">
-                      <input type="submit" value="Add it" />
-                    </div>
-                  </form>
+            {this.props.user ? (
+              <div>
+                <div className="reviewBlockItems">
+                  <button onClick={this.showAddReview}>
+                    {this.state.showAddReview ? "Hide form" : "Add Review"}
+                  </button>
                 </div>
-              ) : null}
-            </div>
+                {this.state.showAddReview ? (
+                  <div>
+                    <form onSubmit={this.handleSubmit}>
+                      <div className="reviewBlockItems">
+                        <label htmlFor="title">Title</label>
+                      </div>
+                      <div className="reviewBlockItems">
+                        <input
+                          className="reviewInput"
+                          type="text"
+                          name="title"
+                          id="title"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      <div className="reviewBlockItems">
+                        <label htmlFor="message">Message</label>
+                      </div>
+                      <div className="reviewBlockItems">
+                        <textarea
+                          className=""
+                          cols="20"
+                          id="message"
+                          name="message"
+                          rows="4"
+                          onChange={this.handleChange}
+                          value={this.state.message}
+                        />
+                      </div>
+                      <br />
+                      <br />
+                      <div className="reviewBlockItems">
+                        <label htmlFor="rate">rate</label>
+                      </div>
+                      <div className="reviewBlockItems">
+                        <input
+                          className="reviewInput rateInput"
+                          type="number"
+                          name="rate"
+                          min="1"
+                          max="5"
+                          id="rate"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      <div className="reviewBlockItems">
+                        <input type="submit" value="Add it" />
+                      </div>
+                    </form>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+          <div>
+            <hr className="verticalHr" />
           </div>
           <div className="productDetailRight">
             <div>

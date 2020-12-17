@@ -56,6 +56,7 @@ export default class Contact extends Component {
             <br />
             <b>PHONE:</b> +5567993086314 +5567993350642
           </div>
+
           {/* CONTACT FORM */}
           <div className="contactFormDiv">
             <form action="" onSubmit={() => this.validateForm()}>

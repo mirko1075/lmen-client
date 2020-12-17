@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withAuth } from "./../context/auth-context";
 import authService from "./../lib/auth-service";
 import { Link } from "react-router-dom";
-
+import img from "./../images/Carousel/img2.jpg";
 class ViewProfile extends Component {
   state = {
     user: {},
@@ -23,9 +23,11 @@ class ViewProfile extends Component {
   }
   render() {
     return (
-      <div>
-        <div></div>
-        <div>
+      <div className="showProfileCont">
+        <div className="viewProfileImgDiv">
+          <img src={img} alt="" className="editProfileImg" />
+        </div>
+        <div className="viewProfileData">
           <div className="showProfile">
             <h3>User profile</h3>
             <br />

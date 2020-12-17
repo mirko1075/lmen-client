@@ -82,8 +82,11 @@ class Login extends Component {
       password,
       repeatpassword,
     } = this.state;
-    if (!email || !password || repeatpassword) {
-      this.setState({ signupErr: "Email and password are mandatory" });
+    if (!email) {
+      this.setState({ signupErr: "Email field is mandatory" });
+      return;
+    } else if (!password || !repeatpassword) {
+      this.setState({ signupErr: "Password fields are mandatory" });
       return;
     } else if (password !== repeatpassword) {
       this.setState({ signupErr: "The 2 passwords don't match" });

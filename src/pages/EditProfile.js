@@ -176,7 +176,7 @@ class EditProfile extends Component {
     console.log("this.props :>> ", this.props);
     return (
       <div className="editProfileContainer">
-        <div>
+        <div className="viewProfileImgDiv">
           <Link to="/private/ViewProfile">Back to profile</Link>
         </div>
         <div>
@@ -185,7 +185,7 @@ class EditProfile extends Component {
               <img src={img} alt="" className="editProfileImg" />
             </div>
             <div>
-              <div>
+              <div className="editProfileForm">
                 <form onSubmit={this.handleSignUpFormSubmit}>
                   <div>
                     <label htmlFor="firstName">First name</label>
