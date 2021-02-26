@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withAuth } from "./../context/auth-context";
-import countryService from "./../lib/countries-service";
+// import countryService from "./../lib/countries-service";
 
 class Login extends Component {
   state = {
@@ -127,9 +127,6 @@ class Login extends Component {
       city,
       state,
       phoneNumber,
-      birthDateDay,
-      birthDateMonth,
-      birthDateYear,
       email,
       password,
       repeatpassword,

@@ -288,7 +288,7 @@ class EditProfile extends Component {
                     >
                       <option value="" key="d-0"></option>
                       {daysArr.map((day) => {
-                        if (this.state.birthDateDay == day) {
+                        if (this.state.birthDateDay === day) {
                           return (
                             <option value={day} key={"m-" + day} selected>
                               {day}
@@ -311,7 +311,7 @@ class EditProfile extends Component {
                     >
                       <option value="" key="m-0"></option>
                       {monthsArr.map((month) => {
-                        if (this.state.birthDateMonth == month) {
+                        if (this.state.birthDateMonth === month) {
                           return (
                             <option value={month} key={"m-" + month} selected>
                               {month}
@@ -334,7 +334,7 @@ class EditProfile extends Component {
                     >
                       <option value="" key="y-0"></option>
                       {yearsArr.map((year) => {
-                        if (this.state.birthDateYear == year) {
+                        if (this.state.birthDateYear === year) {
                           return (
                             <option value={year} key={"m-" + year} selected>
                               {year}

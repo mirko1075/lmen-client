@@ -16,7 +16,7 @@ function ReviewCard(props) {
                 <div key={review._id} className="reviewItem">
                   <div className="reviewTitle">
                     <h4>Title: {review.title}</h4>
-                    {review.userId == props.userId ? (
+                    {review.userId === props.userId ? (
                       <div>
                         <Link
                           to="#"

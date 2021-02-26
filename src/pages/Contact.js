@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import apiService from "./../lib/api-service";
 import image from "../images/Carousel/img1.jpg";
+
 export default class Contact extends Component {
   constructor() {
     super();
@@ -10,10 +11,23 @@ export default class Contact extends Component {
       email: "",
       subject: "",
       message: "",
+      result: "",
     };
   }
+
   validateForm(event) {
     event.preventDefault();
+    const { firstName, lastName, email, message } = this.state;
+    apiService
+      .sendContactForm(firstName, lastName, email, message)
+      .then((sendMail) => {
+        const result = "MAIL SENT";
+        this.setState({ result });
+      })
+      .catch((err) => {
+        const result = err;
+        this.setState({ result });
+      });
   }
 
   handleChange = (event) => {
@@ -33,6 +47,7 @@ export default class Contact extends Component {
             <b>IG:</b>
             <a
               target="_blank"
+              rel="noreferrer"
               href="https://www.instagram.com/lm_e_n.confeccion/"
             >
               @lm_e_n.confeccion
@@ -40,13 +55,21 @@ export default class Contact extends Component {
             <br />
             <br />
             <b>FB:</b>{" "}
-            <a target="_blank" href="https://www.facebook.com/lmen.confeccion">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.facebook.com/lmen.confeccion"
+            >
               @lmen.confeccion
             </a>
             <br />
             <br />
             <b>MAIL:</b>{" "}
-            <a target="_blank" href="mailto:lmen.confeccion@bol.com.br">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="mailto:lmen.confeccion@bol.com.br"
+            >
               lmen.confeccion@bol.com.br
             </a>
             <br />
@@ -59,9 +82,9 @@ export default class Contact extends Component {
 
           {/* CONTACT FORM */}
           <div className="contactFormDiv">
-            <form action="" onSubmit={() => this.validateForm()}>
+            <form onSubmit={(e) => this.validateForm(e)}>
               <div className="">
-                <label for="reg_nome" className="">
+                <label htmlFor="reg_nome" className="">
                   Field of interest*
                 </label>
               </div>
@@ -90,7 +113,7 @@ export default class Contact extends Component {
               </div>
               <div className="rowContactForm">
                 <div className="">
-                  <label for="reg_nome" className="">
+                  <label htmlFor="reg_nome" className="">
                     First name*
                   </label>
                 </div>
@@ -109,7 +132,7 @@ export default class Contact extends Component {
               </div>
               <div className="rowContactForm">
                 <div className="">
-                  <label for="reg_nome" className="">
+                  <label htmlFor="reg_nome" className="">
                     Last name*
                   </label>
                 </div>
@@ -128,7 +151,7 @@ export default class Contact extends Component {
               </div>
               <div className="rowContactForm">
                 <div className="">
-                  <label for="reg_nome" className="">
+                  <label htmlFor="reg_nome" className="">
                     Email*
                   </label>
                 </div>
@@ -147,7 +170,7 @@ export default class Contact extends Component {
               </div>
               <div className="rowContactForm">
                 <div className="">
-                  <label for="reg_nome" className="">
+                  <label htmlFor="reg_nome" className="">
                     Subject*
                   </label>
                 </div>
@@ -166,7 +189,7 @@ export default class Contact extends Component {
               </div>
               <div className="rowContactForm">
                 <div className="">
-                  <label for="reg_nome" className="">
+                  <label htmlFor="reg_nome" className="">
                     Message*
                   </label>
                 </div>
@@ -177,10 +200,9 @@ export default class Contact extends Component {
                     id="message"
                     name="message"
                     rows="4"
+                    value={this.state.message}
                     onChange={this.handleChange}
-                  >
-                    {this.state.message}
-                  </textarea>
+                  />
                 </div>
               </div>
               <div className="rowContactForm">
@@ -208,11 +230,12 @@ export default class Contact extends Component {
               </div>
               <div className="rowContactForm">
                 <div className="">
-                  <input className="" value="SEND" id="submit" type="submit" />
+                  <input className="" value="SEND" id="submit" type="submit"  onSubmit={(e) => this.validateForm(e)} />
                 </div>
               </div>
             </form>
           </div>
+          <div>{this.state.result}</div>
           {/* END OF CONTACT FORM */}
         </div>
       </div>

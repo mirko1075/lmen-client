@@ -115,6 +115,22 @@ class ApiService {
       });
     return pr;
   }
+
+  sendContactForm(firstName, lastName, email, message) {
+    console.log('Sending')
+    const pr = this.api
+      .post("/sendContact", {
+        firstName,
+        lastName,
+        email,
+        message,
+      })
+      .then((response) => response.data)
+      .catch((err) => {
+        console.log(err);
+      });
+    return pr;
+  }
 }
 
 const apiService = new ApiService();

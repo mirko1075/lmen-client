@@ -112,10 +112,9 @@ class ProductDetail extends Component {
 
   deleteReview = (id) => {
     let reviewsArr = this.state.review;
-    let userId = this.state.userId;
     let productId = this.state.product._id;
     const reviewsArrMod = reviewsArr.filter((review) => {
-      return review._id != id;
+      return review._id !== id;
     });
     const pr = apiService
       .deleteReview(id, productId)

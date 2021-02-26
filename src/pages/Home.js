@@ -23,7 +23,7 @@ class Home extends Component {
     let { category } = this.props.match.params;
     let favourites = [];
     // console.log("this props from didMount :>> ", this.props.match.params);
-    !category ? (category = "") : (category = category);
+    !category && (category = "");
     category ? this.getCategoryProducts(category) : this.getAllProducts();
     this.props.user
       ? (favourites = this.props.user.favourites)
@@ -39,7 +39,7 @@ class Home extends Component {
       this.changeImg(img);
       // console.log("img :>> ", img);
     }, 2000);
-    //clearInterval(intervalID);
+    clearInterval(intervalID);
   }
   changeImg(img) {
     const image = import("../images/Carousel/" + img)

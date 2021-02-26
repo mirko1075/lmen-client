@@ -42,6 +42,7 @@ export default function About() {
             allowFullScreen=""
             aria-hidden="false"
             tabIndex="0"
+            title="map"
           />
         </div>
       </div>

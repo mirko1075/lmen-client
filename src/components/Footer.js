@@ -6,7 +6,8 @@ export default function Footer() {
   return (
     <div className="footer">
       <div className="FooterDivs">
-        <Link>Privacy policy</Link> | <Link>Cookies policy</Link> |{" "}
+        <Link to="/privacy">Privacy policy</Link> |{" "}
+        <Link to="/privacy">>Cookies policy</Link> |{" "}
         <Link to="/Contact">Contact</Link>
       </div>
       <div className="FooterDivs">
@@ -20,11 +21,16 @@ export default function Footer() {
           <a
             href="https://www.instagram.com/lm_e_n.confeccion/"
             target="_blank"
+            rel="noreferrer"
           >
             <img src={igIcon} alt="Add me on IG" className="socialIcon" />
           </a>
           {"     "}
-          <a href="https://www.facebook.com/lmen.confeccion" target="_blank">
+          <a
+            href="https://www.facebook.com/lmen.confeccion"
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={fbIcon} alt="Add me on FB" className="socialIcon" />
           </a>
           {/* <!-- ShareThis END --> */}

@@ -45,10 +45,7 @@ class DetailCard extends Component {
     this.setState({ favourites, isFavorite }, () => callback && callback());
   };
   render() {
-    const { product, review } = this.state;
-    const imgWidth = "100";
-    const imgHeight = "100";
-    const addToCart = this.props.context.addToCart;
+    const { product } = this.state;
 
     return (
       <div className="detailCardCont">
